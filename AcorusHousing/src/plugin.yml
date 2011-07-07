@@ -1,0 +1,7 @@
+name: AcorusHousing
+main: com.K3V1N32.AcorusHousing
+version: V0.00
+commands:
+    command:
+        description: desc
+        usage: /commandhere
