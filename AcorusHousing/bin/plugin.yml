@@ -2,6 +2,9 @@ name: AcorusHousing
 main: com.K3V1N32.AcorusHousing.AcorusHousing
 version: V0.00
 commands:
-    command:
-        description: desc
-        usage: /commandhere
+    houseregA:
+        description: set an apartment door
+        usage: /houseregA [name]
+    houseregB:
+        description: set aa house door
+        usage: /houseregB [name]

@@ -21,7 +21,7 @@ public class AcorusHousing extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");	
     private final AcorusHousingPlayerListener playerListener = new AcorusHousingPlayerListener(this);
     private final AcorusHousingBlockListener blockListener = new AcorusHousingBlockListener(this);
-    CommandExecutor commandExecutor = new CommandExecutor(playerListener);
+
     // NOTE: There should be no need to define a constructor any more for more info on moving from
     // the old constructor see:
     // http://forums.bukkit.org/threads/too-long-constructor.5032/
@@ -41,8 +41,6 @@ public class AcorusHousing extends JavaPlugin {
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
 		getServer().getPluginManager().registerEvent(Type.PLUGIN_ENABLE, new Server(this), Priority.Monitor, this);
         getServer().getPluginManager().registerEvent(Type.PLUGIN_DISABLE, new Server(this), Priority.Monitor, this);
-        getCommand("houseregA").setExecutor(commandExecutor);
-		getCommand("houseregB").setExecutor(commandExecutor);
         // EXAMPLE: Custom code, here we just output some info so we can check all is well
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is Enhancing Your Housing!" );

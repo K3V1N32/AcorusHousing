@@ -18,20 +18,12 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 			String[] args) {
 
 		if(commandLabel.equalsIgnoreCase("houseregA")) {
-			if(args[0] == null)
-			{
-				sender.sendMessage("You need to specify a name!");
-			}else
 			if(sender.isOp()) {
 				sender.sendMessage("Apartment: " + args[0] + ". Left click door to register.");
 			}
 		}
 		else 
 			if(commandLabel.equalsIgnoreCase("houseregB")) {
-				if(args[0] == null)
-				{
-					sender.sendMessage("You need to specify a name!");
-				}else
 				if(sender.isOp()) {
 					sender.sendMessage("House: " + args[0] + ". Left click door to register.");
 				}
