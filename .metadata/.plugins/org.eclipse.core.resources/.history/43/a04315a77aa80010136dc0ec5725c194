@@ -17,4 +17,18 @@ public class AcorusHousingBlockListener extends BlockListener {
     public AcorusHousingBlockListener(final AcorusHousing plugin) {
         this.plugin = plugin;
     }
+
+    @Override
+    public void onBlockPhysics(BlockPhysicsEvent event) {
+        Block block = event.getBlock();
+    }
+
+    @Override
+    public void onBlockCanBuild(BlockCanBuildEvent event) {
+        Material mat = event.getMaterial();
+
+        if (mat.equals(Material.CACTUS)) {
+            event.setBuildable(true);
+        }
+    }
 }
