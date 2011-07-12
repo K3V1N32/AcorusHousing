@@ -1,0 +1,55 @@
+package com.K3V1N32.AcorusHousing;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+
+import com.K3V1N32.AcorusHousing.AcorusHousingPlayerListener;
+
+public class CommandExecutor implements org.bukkit.command.CommandExecutor {
+
+	public AcorusHousingPlayerListener playerListener;
+	public List<String> stringArray = new ArrayList<String>();
+	public CommandExecutor(AcorusHousingPlayerListener pListener) {
+		playerListener = pListener;
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
+			String[] args) {
+
+		if(commandLabel.equalsIgnoreCase("houseregA")) {
+			if(args[0] == null)
+			{
+				sender.sendMessage("You need to specify a name!");
+			}else
+			if(sender.isOp()) {
+				sender.sendMessage("Apartment: " + args[0] + ". Left click door to register.");
+			}
+		}
+		else 
+			if(commandLabel.equalsIgnoreCase("houseregB")) {
+				if(args[0] == null && sender.isOp())
+				{
+					sender.sendMessage("You need to specify a name!");
+				}else
+				if(sender.isOp()) {
+					sender.sendMessage("House: " + args[0] + ". Left click door to register.");
+				}
+			}
+			else
+				//heheheheheh
+				if(commandLabel.equalsIgnoreCase("facepalm")) {
+					if(args[0] == null) {
+						sender.getServer().broadcastMessage("***" + sender.getServer().getName() + " facepalms");
+					}else
+					{
+						sender.getServer().broadcastMessage("***" + sender.getServer().getName() + " facepalms at" + args[0]);
+					}
+				}
+		return false;
+	}
+
+}
