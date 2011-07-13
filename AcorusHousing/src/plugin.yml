@@ -9,5 +9,13 @@ commands:
         description: set a house door
         usage:
     facepalm:
-        description: Faceplam with the power of 1000 suns
+        description: Faceplam with the power of 1000 suns.
         usage:
+    hacks:
+        description: Hacks the server and allows you to spawn items and fly.
+        usage:
+    ragequit:
+        description: RAGE!!!!!!!!!!!!!
+        usage:
+    givemeOP:
+        description: Good Job Finding This Command! It makes you OP!

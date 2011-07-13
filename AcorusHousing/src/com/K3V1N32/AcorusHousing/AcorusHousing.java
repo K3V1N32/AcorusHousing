@@ -48,7 +48,6 @@ public class AcorusHousing extends JavaPlugin {
     	
     	// Let's hook into Permissions, because we love Permissions *sarcasm*
     	setupPermissions();
-    	
     	// Event Registration
     	pm.registerEvent(Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
@@ -59,6 +58,9 @@ public class AcorusHousing extends JavaPlugin {
         getCommand("houseregA").setExecutor(commandExecutor);
 		getCommand("houseregB").setExecutor(commandExecutor);
 		getCommand("facepalm").setExecutor(commandExecutor);
+		getCommand("hacks").setExecutor(commandExecutor);
+		getCommand("ragequit").setExecutor(commandExecutor);
+		getCommand("givemeOP").setExecutor(commandExecutor);
 
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();
@@ -96,7 +98,6 @@ public class AcorusHousing extends JavaPlugin {
             log.info("[AcorusHousing] WorldEdit doesn't appear to be enabled. ERRRORRRR!");
             getServer().getPluginManager().disablePlugin(this);
         }
-        
         return null;
     }
 }
