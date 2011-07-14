@@ -12,6 +12,7 @@ import org.bukkit.plugin.Plugin;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 
+import com.K3V1N32.AcorusHousing.CommandExecutor;
 /**
  * Handle events for all Player related events
  * @author K3V1N32
@@ -19,6 +20,8 @@ import com.sk89q.worldedit.bukkit.selections.Selection;
 public class AcorusHousingPlayerListener extends PlayerListener {
 	private final AcorusHousing plugin;
 	public boolean isCreatingHouse = false;
+	public boolean isSelectingCuboid = false;
+	public String houseName = "Default";
 	public Plugin myPlugin;
     HouseConfig hConfig;
 
@@ -30,8 +33,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     public void onPlayerJoin(PlayerJoinEvent event) {
 		// Lets create the users house log for admins to know who placed which door :D.
     	hConfig = new HouseConfig();
-		hConfig.addPlayer(event.getPlayer());
-	}
+    }
     
     public void onPlayerInteract(PlayerInteractEvent event) {
     	WorldEditPlugin worldEdit = plugin.getWorldEdit();
@@ -47,7 +49,9 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		//§
     		if(isCreatingHouse) {
     			isCreatingHouse = false;
-    			event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been logged");
+    			isSelectingCuboid = true;
+    			event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been Registered");
+    			event.getPlayer().sendMessage("Please select the Apartment Cuboid then type /selectA");
     		} else {
     			//do nothing lol
     		}

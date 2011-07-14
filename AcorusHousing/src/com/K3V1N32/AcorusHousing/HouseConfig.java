@@ -19,14 +19,7 @@ public class HouseConfig {
 		houseLocations.load();
 	}
 	
-	public void addPlayer(Player player) {
-		File playerData = new File(configDirectory + "players" + File.separator + player.getName() + ".yml");
-		if(!playerData.exists()) {
-			try {
-				playerData.createNewFile();
-			} catch (IOException e) {
-				// Do nothing... don't care.
-			}
-		}
+	public void addHouse(Player player, Block woodenDoor) {
+		
 	}
 }

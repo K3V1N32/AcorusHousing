@@ -42,7 +42,7 @@
 </editorArea>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AcorusHousing.java" partName="AcorusHousing.java" path="C:/Documents and Settings/Kevin/Desktop/AcorusHousing/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousing.java" title="AcorusHousing.java" tooltip="AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousing.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousing.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2801" selectionTopPixel="876"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="538" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AcorusHousingBlockListener.java" partName="AcorusHousingBlockListener.java" path="C:/Documents and Settings/Kevin/Desktop/AcorusHousing/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingBlockListener.java" title="AcorusHousingBlockListener.java" tooltip="AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingBlockListener.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingBlockListener.java"/>
@@ -50,22 +50,21 @@
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AcorusHousingPlayerListener.java" partName="AcorusHousingPlayerListener.java" path="C:/Documents and Settings/Kevin/Desktop/AcorusHousing/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingPlayerListener.java" title="AcorusHousingPlayerListener.java" tooltip="AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingPlayerListener.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingPlayerListener.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="967" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1787" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CommandExecutor.java" partName="CommandExecutor.java" path="C:/Documents and Settings/Kevin/Desktop/AcorusHousing/AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java" title="CommandExecutor.java" tooltip="AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CommandExecutor.java" partName="CommandExecutor.java" path="C:/Documents and Settings/Kevin/Desktop/AcorusHousing/AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java" title="CommandExecutor.java" tooltip="AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="860" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="823" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HouseConfig.java" partName="HouseConfig.java" path="C:/Documents and Settings/Kevin/Desktop/AcorusHousing/AcorusHousing/src/com/K3V1N32/AcorusHousing/HouseConfig.java" title="HouseConfig.java" tooltip="AcorusHousing/src/com/K3V1N32/AcorusHousing/HouseConfig.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HouseConfig.java" partName="HouseConfig.java" path="C:/Documents and Settings/Kevin/Desktop/AcorusHousing/AcorusHousing/src/com/K3V1N32/AcorusHousing/HouseConfig.java" title="HouseConfig.java" tooltip="AcorusHousing/src/com/K3V1N32/AcorusHousing/HouseConfig.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/HouseConfig.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="849" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="567" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Errors"/>
+<expanded>&#x0A;<category IMemento.internal.id="Warnings (13 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -271,166 +270,163 @@
 <workingSets/>
 <navigationHistory>
 <editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingPlayerListener.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingPlayerListener.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousing.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingPlayerListener.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/HouseConfig.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingBlockListener.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingPlayerListener.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/HouseConfig.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/CommandExecutor.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/AcorusHousing/src/com/K3V1N32/AcorusHousing/AcorusHousingBlockListener.java"/>
-<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" uri="file:/C:/DOCUME~1/Kevin/LOCALS~1/Temp/Rar$DI02.843/CommandExecutor.java"/>
 </editors>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="628" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="397" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="789" y="0"/>
-</item>
-<item historyLabel="HouseConfig.java" index="3">
-<position info="not_deleted" x="883" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="2">
-<position info="not_deleted" x="789" y="0"/>
-</item>
-<item historyLabel="AcorusHousingPlayerListener.java" index="1">
-<position info="not_deleted" x="516" y="0"/>
-</item>
-<item historyLabel="AcorusHousingBlockListener.java" index="4">
-<position info="not_deleted" x="559" y="0"/>
-</item>
-<item historyLabel="AcorusHousing.java" index="0">
-<position info="not_deleted" x="1122" y="0"/>
-</item>
-<item historyLabel="AcorusHousing.java" index="0">
-<position info="not_deleted" x="2148" y="0"/>
-</item>
-<item historyLabel="AcorusHousing.java" index="0">
-<position info="not_deleted" x="2180" y="0"/>
-</item>
-<item historyLabel="AcorusHousingPlayerListener.java" index="5">
-<position info="not_deleted" x="516" y="0"/>
-</item>
-<item historyLabel="HouseConfig.java" index="6">
-<position info="not_deleted" x="883" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="835" y="0"/>
-</item>
-<item historyLabel="AcorusHousingPlayerListener.java" index="5">
-<position info="not_deleted" x="922" y="0"/>
-</item>
-<item historyLabel="AcorusHousingBlockListener.java" index="8">
-<position info="not_deleted" x="559" y="0"/>
-</item>
-<item historyLabel="AcorusHousing.java" index="0">
-<position info="not_deleted" x="2801" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="1627" y="0"/>
-</item>
-<item historyLabel="AcorusHousingPlayerListener.java" index="5">
-<position info="not_deleted" x="967" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="1627" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="1701" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="9">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="1701" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="555" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="835" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="835" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="835" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="835" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="1538" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
-<position info="not_deleted" x="1247" y="0"/>
-</item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="912" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="1594" y="1"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="589" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="628" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="655" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="835" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="670" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="687" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="729" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="538" y="0"/>
 </item>
-<item historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="769" y="0"/>
 </item>
-<item historyLabel="AcorusHousingPlayerListener.java" index="5">
+<item historyLabel="AcorusHousingPlayerListener.java" index="0">
 <position info="not_deleted" x="967" y="0"/>
 </item>
-<item active="true" historyLabel="CommandExecutor.java" index="7">
+<item historyLabel="CommandExecutor.java" index="1">
 <position info="not_deleted" x="769" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="2">
+<position info="not_deleted" x="972" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="2">
+<position info="not_deleted" x="1821" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="2">
+<position info="not_deleted" x="2203" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="2">
+<position info="not_deleted" x="895" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="779" y="0"/>
+</item>
+<item historyLabel="AcorusHousing.java" index="3">
+<position info="not_deleted" x="2338" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="569" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1798" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1928" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1935" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="2062" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="2062" y="0"/>
+</item>
+<item historyLabel="AcorusHousing.java" index="3">
+<position info="not_deleted" x="2338" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="2">
+<position info="not_deleted" x="2194" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="2062" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1977" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1984" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="2060" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1913" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1854" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1854" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="2">
+<position info="not_deleted" x="2194" y="0"/>
+</item>
+<item historyLabel="HouseConfig.java" index="4">
+<position info="not_deleted" x="849" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="1722" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="2">
+<position info="not_deleted" x="2194" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="2552" y="0"/>
+</item>
+<item historyLabel="AcorusHousing.java" index="3">
+<position info="not_deleted" x="538" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="2552" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="5">
+<position info="not_deleted" x="2199" y="0"/>
+</item>
+<item historyLabel="CommandExecutor.java" index="1">
+<position info="not_deleted" x="823" y="0"/>
+</item>
+<item historyLabel="AcorusHousingPlayerListener.java" index="5">
+<position info="not_deleted" x="2199" y="0"/>
+</item>
+<item historyLabel="HouseConfig.java" index="6">
+<position info="not_deleted" x="849" y="0"/>
+</item>
+<item active="true" historyLabel="HouseConfig.java" index="6">
+<position info="not_deleted" x="965" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

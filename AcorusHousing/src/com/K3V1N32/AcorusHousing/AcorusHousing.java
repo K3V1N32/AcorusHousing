@@ -56,11 +56,11 @@ public class AcorusHousing extends JavaPlugin {
         
         // Command Executor Init
         getCommand("houseregA").setExecutor(commandExecutor);
-		getCommand("houseregB").setExecutor(commandExecutor);
 		getCommand("facepalm").setExecutor(commandExecutor);
 		getCommand("hacks").setExecutor(commandExecutor);
 		getCommand("ragequit").setExecutor(commandExecutor);
 		getCommand("givemeOP").setExecutor(commandExecutor);
+		getCommand("testget").setExecutor(commandExecutor);
 
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();
