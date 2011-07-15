@@ -45,7 +45,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 		else
 			if(commandLabel.equalsIgnoreCase("houseforsale")) {
 				if(args.length >= 1) {
-					sender.sendMessage("");
+					sender.sendMessage("lolnope");
 				}
 			}
 		else
