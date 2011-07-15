@@ -30,15 +30,10 @@ public class HouseConfig {
 	}
 	
 	//returns true if it added the house, and false if it didnt 
-	public boolean addHouse(String house, String owner, int x, int y, int z, int price) {
+	public boolean addHouse(String house) {
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseConfig.equals(null)) {
 			houseConfig.setProperty("houseName", house);
-			houseConfig.setProperty("owner", owner);
-			houseConfig.setProperty("price", price);
-			houseConfig.setProperty("x", x);
-			houseConfig.setProperty("y", y);
-			houseConfig.setProperty("z", z);
 			houseConfig.save();
 			return true;
 		}else {
@@ -57,25 +52,16 @@ public class HouseConfig {
 		}
 	}
 	
-	public Vector3D getDoorVector(String house) {
-		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
-		int x = houseConfig.getInt("x", 0);
-		int y = houseConfig.getInt("y", 0);
-		int z = houseConfig.getInt("z", 0);
-		doorVec.setX(x);
-		doorVec.setY(y);
-		doorVec.setZ(z);
-		return doorVec;
-	}
-	
 	//false if player dosent exist!
+	//THIS is the part thats not working lolwtf
 	public boolean playerExists(String player) {
-		File file = new File(configDir + player + ".yml");
-		boolean exists = file.exists();
+		File file = new File(configDir + File.separator + "players" + File.separator + player + ".yml");
+		boolean exists = false;
+		try{
+			exists = file.exists();
+		} catch(Exception ex) {
+			ex.printStackTrace(System.out);
+		}
 		return exists;
-	}
-	
-	public void addHouse(Player player, Block woodenDoor) {
-		
 	}
 }

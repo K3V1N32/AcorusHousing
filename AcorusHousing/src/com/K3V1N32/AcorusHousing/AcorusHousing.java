@@ -56,11 +56,8 @@ public class AcorusHousing extends JavaPlugin {
         
         // Command Executor Init
         getCommand("housereg").setExecutor(commandExecutor);
-        getCommand("select").setExecutor(commandExecutor);
-		getCommand("facepalm").setExecutor(commandExecutor);
-		getCommand("hacks").setExecutor(commandExecutor);
 		getCommand("ragequit").setExecutor(commandExecutor);
-		getCommand("givemeOP").setExecutor(commandExecutor);
+		getCommand("houseforsale").setExecutor(commandExecutor);
 		
 		//look for config/persit dirs
 		//gonna happen eventually...

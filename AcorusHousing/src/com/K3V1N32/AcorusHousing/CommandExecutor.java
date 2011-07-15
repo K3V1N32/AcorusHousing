@@ -30,69 +30,31 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		
 		if(commandLabel.equalsIgnoreCase("housereg")) {
-			
-			if((args.length <= 2) && sender.isOp())
+			if((args.length <= 0) && sender.isOp())
 			{
-				sender.sendMessage("Correct usage is: /housereg [AprtName] [PlayerName] [price]");
+				sender.sendMessage("Correct usage is: /housereg [RegionName]");
 				return false;
 			}else
-			if(sender.isOp() && args.length == 3) {
+			if(sender.isOp() && args.length == 1) {
 				houseName = args[0];
-				player = args[1];
-				price = Integer.parseInt(args[2]);
 				playerListener.isCreatingHouse = true;
-				if(!hConfig.playerExists(player)) {
-					sender.sendMessage("That player does not exist!");
-				} else {
-					sender.sendMessage("Apartment: " + args[0] + ". " + "Player:" + args[1] + ". Left click door to register.");
-				}
+				sender.sendMessage("Creating Apartment at: " + args[0] + ". Left click door to register.");
 				return true;
 			}
 		}
-		else 
-			//Heheheh :P P.S. These were SJ's ideas
-				if(commandLabel.equalsIgnoreCase("facepalm")) {
-					if((args.length == 0) && sender.isOp()) {
-						sender.getServer().broadcastMessage("***" + ((Player)sender).getName() + " facepalms");
-						return true;
-					}else if(sender.isOp())
-					{
-						sender.getServer().broadcastMessage("***" + ((Player)sender).getName() + " facepalms at " + args[0]);
-						return true;
-					}
+		else
+			if(commandLabel.equalsIgnoreCase("houseforsale")) {
+				if(args.length >= 1) {
+					sender.sendMessage("");
 				}
-			else
-				//teehee
-				if(commandLabel.equalsIgnoreCase("hacks")) {
-					sender.getServer().broadcastMessage(((Player)sender).getName() + "Has Been Promoted for using /hacks!");
-					((Player)sender).kickPlayer("Your account at " + ((Player)sender).getAddress() + " has been logged and sent to Mojang! NOTCH NO-LIKEY HACKS");
-					return true;
-				}
-			else
-				//lolol
-				if(commandLabel.equalsIgnoreCase("givemeOP")) {
-					sender.getServer().broadcastMessage("§5" + ((Player)sender).getName() + " was kicked for begging");
-					((Player)sender).kickPlayer("Dont Try To Hack lol");
-					return true;
-				}
-			else
-				//RAGE!!!!!!!!!
-				if(commandLabel.equalsIgnoreCase("ragequit")) {
-					sender.getServer().broadcastMessage("§5" + ((Player)sender).getName() + " ragequit");
-					((Player)sender).kickPlayer("Have a nice day");
-					return true;
-				}
-			else
-				if(commandLabel.equalsIgnoreCase("select")) {
-					WorldEditPlugin worldEdit = plugin.getWorldEdit();
-			    	Selection cuboidSelected = worldEdit.getSelection(((Player)sender));
-					if(playerListener.isSelectingCuboid && cuboidSelected != null) {
-						//main cuboid addition method here
-						
-						sender.sendMessage("Succesfully added the cuboid to apartment:");
-					}
-					return true;
-				}
+			}
+		else
+			//RAGE!!!!!!!!!
+			if(commandLabel.equalsIgnoreCase("ragequit")) {
+				sender.getServer().broadcastMessage("§5" + ((Player)sender).getName() + " ragequit");
+				((Player)sender).kickPlayer("Have a nice day");
+				return true;
+			}
 		return false;
 	}
 

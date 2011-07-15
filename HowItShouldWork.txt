@@ -1,0 +1,36 @@
+Admin marks a region EX: /region define 101Dunwood
+                                              ^cmd    ^cmd   ^address
+Admin enters command EX: /housereg 101Dunwood
+		             ^cmd          ^address
+Admin left-clicks door
+Door is registered to the address "101Dunwood"
+Admin sets 101Dunwood for sale EX:/houseforsale 101Dunwood 1200
+                                                                ^cmd                ^address        ^price
+Admin sets a sign near the door or in a real estate office
+EX:
+What an admin puts on the sign:
+LINE1: [houseInfo]
+Makes the sign a house info sign
+LINE2: 101Dunwood
+Sets the address for the house info
+
+What you see on the sign after you press 'done':
+LINE1: 101Dunwood
+Address
+LINE2: [Owner]
+Puts the name of the owner here, [Owner] if no owner yet.
+LINE3: [Price]
+Puts the price here
+LINE4: Left-Click To Buy
+This is to help 'n00b' players :P
+
+Player left clicks sign
+Player is registered as the owner of 101Dunwood if he/she has enough money to purchase the house
+Player wants to have a roomate
+Player uses command /givekey Friend101
+Friend101 is added as an owner to 101Dunwood
+Friend101 breaks a ton of blocks in the house
+Player uses command /takekey Friend101
+Friend101 is removed from region and can nolonger edit things in Players house :)
+Admins only have to define the regions and prices, the rest is upto the players :D
+
