@@ -3,6 +3,7 @@ package com.K3V1N32.AcorusHousing;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+
 import javax.management.timer.Timer;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -11,6 +12,7 @@ import org.bukkit.util.config.Configuration;
 
 public class HouseConfig {
 	public Configuration houseConfig;
+	public Vector3D doorVec;
 	public String configDir = "plugins" + File.separator + "AcorusHousing" + File.separator;
 	
 	
@@ -55,10 +57,25 @@ public class HouseConfig {
 		}
 	}
 	
+	public Vector3D getDoorVector(String house) {
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
+		int x = houseConfig.getInt("x", 0);
+		int y = houseConfig.getInt("y", 0);
+		int z = houseConfig.getInt("z", 0);
+		doorVec.setX(x);
+		doorVec.setY(y);
+		doorVec.setZ(z);
+		return doorVec;
+		
+	}
+	
 	public boolean playerExists(String player) {
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + player + ".yml"));
-		
-		return false;
+		if(houseConfig.equals(null)) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public void addHouse(Player player, Block woodenDoor) {
