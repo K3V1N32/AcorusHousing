@@ -2,11 +2,14 @@ package com.K3V1N32.AcorusHousing;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Sign;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
+
 import org.bukkit.material.Door;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
@@ -59,7 +62,35 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     				event.getPlayer().sendMessage("The Region " + houseName + " has already been registered!");
     			}
     		}
+    	}
+    	if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && (event.getClickedBlock().getType().equals(Material.SIGN_POST) || event.getClickedBlock().getType().equals(Material.WALL_SIGN))) {
+    		hConfig = new HouseConfig();
+    		if(event.getPlayer().isOp()) {
+    		BlockState state = event.getClickedBlock().getState();
+    		if (state instanceof Sign) {
+    		    Sign sign = (Sign)state;
+    		    if(sign.getLine(0).equalsIgnoreCase("[houseinfo]")) {
+    		    	houseName = sign.getLine(1);
+    		    	
+    		    	sign.setLine(2, "Like a bauss");
+    		    	sign.update();
+    		    }
+    		}
+    		}
+    	}
+    	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.IRON_DOOR_BLOCK)) {
+    		event.getPlayer().sendMessage("Its a door fo sho WTF!");
     		
+    		if (event.getClickedBlock() instanceof Door) {
+    		    Door door = (Door)event.getClickedBlock();
+    		    if(door.isOpen()) {
+    		    	door.setOpen(false);
+    		    } else {
+    		    	door.setOpen(true);
+    		    }    		    
+    		} else {
+    			event.getPlayer().sendMessage("Well, its a door but not a Door :U");
+    		}
     	}
     	
     }

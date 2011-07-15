@@ -2,13 +2,10 @@ name: AcorusHousing
 main: com.K3V1N32.AcorusHousing.AcorusHousing
 version: 0.10
 commands:
-    housereg:
-        description: /houserega [ApartmentName] [Player name]
+    house:
+        description: /house [reg|info|forsale]
         usage:
     ragequit:
         description: RAGE!!!!!!!!!!!!!
-        usage:
-    houseforsale:
-        description: put a house for sale
         usage:
   

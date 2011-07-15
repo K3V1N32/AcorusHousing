@@ -51,20 +51,10 @@ public class AcorusHousing extends JavaPlugin {
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLUGIN_ENABLE, new Server(this), Priority.Monitor, this);
         pm.registerEvent(Type.PLUGIN_DISABLE, new Server(this), Priority.Monitor, this);
-        pm.registerEvent(Type.BLOCK_PLACE, new Server(this), Priority.Normal, this);
         
         // Command Executor Init
-        getCommand("housereg").setExecutor(commandExecutor);
+        getCommand("house").setExecutor(commandExecutor);
 		getCommand("ragequit").setExecutor(commandExecutor);
-		getCommand("houseforsale").setExecutor(commandExecutor);
-		
-		//look for config/persit dirs
-		if(hConfig.makeDirs()) {
-			log.info("[AcorusHousing] Made Directories Successfully!!!");
-		} else {
-			log.info("[AcorusHousing] Directoris Already Made, or ERROR XD");
-		}
-
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();
         log.info( pdfFile.getName() + " version " + pdfFile.getVersion() + " is Enhancing Your Housing!" );

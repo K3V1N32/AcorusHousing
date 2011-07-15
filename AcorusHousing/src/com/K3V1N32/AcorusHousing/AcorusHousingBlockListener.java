@@ -21,17 +21,4 @@ public class AcorusHousingBlockListener extends BlockListener {
         this.plugin = plugin;
     }
     
-    public void onBlockPlace(BlockPlaceEvent event) {
-    	if(event.getBlock().getType().equals(Material.SIGN)) {
-    		BlockState state = event.getBlock().getState();
-    		if (state instanceof Sign) {
-    		    Sign sign = (Sign)state;
-    		    if(sign.getLine(1).equalsIgnoreCase("[houseinfo]")) {
-    		    	event.getPlayer().sendMessage("YAY IT WORKED LOL");
-    		    }
-    		}
-    	}
-    	
-    }
-    
 }

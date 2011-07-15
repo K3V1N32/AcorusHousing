@@ -28,27 +28,43 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		
-		if(commandLabel.equalsIgnoreCase("housereg")) {
-			if((args.length <= 0) && sender.isOp())
-			{
-				sender.sendMessage("Correct usage is: /housereg [RegionName]");
-				return false;
-			}else
-			if(sender.isOp() && args.length == 1) {
-				houseName = args[0];
-				playerListener.isCreatingHouse = true;
-				playerListener.houseName = houseName;
-				sender.sendMessage("Creating Apartment at: " + args[0] + ". Left click door to register.");
-				return true;
-			}
-		}
-		else
-			if(commandLabel.equalsIgnoreCase("houseforsale")) {
-				if(args.length >= 1) {
-					sender.sendMessage("lolnope");
+		//these will be the staff house commands
+		if(commandLabel.equalsIgnoreCase("house")) {
+			hConfig = new HouseConfig();
+			if(sender.isOp()) {
+			if(args.length == 2 && sender.isOp() && args[0].equals("info")) {
+				if(hConfig.houseExists(args[1])) {
+					int price = hConfig.getDoorPrice(args[1]);
+					sender.sendMessage("The price of that house is: " + price);
+					return true;
+				} else {
+					sender.sendMessage("Please specify a valid house");
+					return false;
 				}
 			}
+			if(args.length == 2 && args[0].equals("reg")) {
+				houseName = args[1];
+				if(hConfig.houseExists(houseName)) {
+					playerListener.isCreatingHouse = true;
+					playerListener.houseName = houseName;
+					sender.sendMessage("Creating Apartment at: " + args[0] + ". Left click door to register.");
+					return true;
+				} else {
+					return false;
+				}
+			}
+			if(args.length == 3 && args[0].equals("forsale")) {
+				if(hConfig.houseExists(args[1])) {
+					int price = Integer.parseInt(args[2]);
+					hConfig.setDoorPrice(args[1], price);
+					sender.sendMessage("Set price for " + args[1] + " to " + price);
+					return false;
+				} else {
+					return false;
+				}
+			}
+			}
+		}
 		else
 			//RAGE!!!!!!!!!
 			if(commandLabel.equalsIgnoreCase("ragequit")) {
