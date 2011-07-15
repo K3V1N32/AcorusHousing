@@ -1,5 +1,7 @@
 package com.K3V1N32.AcorusHousing;
 
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
@@ -71,9 +73,20 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    Sign sign = (Sign)state;
     		    if(sign.getLine(0).equalsIgnoreCase("[houseinfo]")) {
     		    	houseName = sign.getLine(1);
-    		    	
-    		    	sign.setLine(2, "Like a bauss");
-    		    	sign.update();
+    		    	if(hConfig.houseExists(houseName)) {
+    		    		int price = hConfig.getDoorPrice(houseName);
+    		    		sign.setLine(0, houseName);
+    		    		sign.setLine(1, "[forsale]");
+    		    		sign.setLine(2, "$" + price);
+    		    		sign.setLine(3, "Click To Buy!");
+    		    		sign.update();
+    		    	} else {
+    		    		sign.setLine(0, "");
+    		    		sign.setLine(1, "§5NO HOUSE LOL");
+    		    		sign.setLine(2, "");
+    		    		sign.setLine(3, "");
+    		    		sign.update();
+    		    	}
     		    }
     		}
     		}

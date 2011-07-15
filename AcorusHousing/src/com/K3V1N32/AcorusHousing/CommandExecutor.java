@@ -32,35 +32,34 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 		if(commandLabel.equalsIgnoreCase("house")) {
 			hConfig = new HouseConfig();
 			if(sender.isOp()) {
-			if(args.length == 2 && sender.isOp() && args[0].equals("info")) {
+			if(args.length == 2 && args[0].equals("info")) {
 				if(hConfig.houseExists(args[1])) {
 					int price = hConfig.getDoorPrice(args[1]);
 					sender.sendMessage("The price of that house is: " + price);
 					return true;
 				} else {
-					sender.sendMessage("Please specify a valid house");
-					return false;
+					sender.sendMessage("No House Exists! :O");
 				}
-			}
+			} else
 			if(args.length == 2 && args[0].equals("reg")) {
 				houseName = args[1];
-				if(hConfig.houseExists(houseName)) {
+				if(!hConfig.houseExists(houseName)) {
 					playerListener.isCreatingHouse = true;
 					playerListener.houseName = houseName;
 					sender.sendMessage("Creating Apartment at: " + args[0] + ". Left click door to register.");
 					return true;
 				} else {
-					return false;
+					sender.sendMessage("That House Exists Already! :U");
 				}
-			}
+			} else
 			if(args.length == 3 && args[0].equals("forsale")) {
 				if(hConfig.houseExists(args[1])) {
 					int price = Integer.parseInt(args[2]);
 					hConfig.setDoorPrice(args[1], price);
 					sender.sendMessage("Set price for " + args[1] + " to " + price);
-					return false;
+					return true;
 				} else {
-					return false;
+					sender.sendMessage("No House Exists! :O");
 				}
 			}
 			}
