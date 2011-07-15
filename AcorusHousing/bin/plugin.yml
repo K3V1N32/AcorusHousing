@@ -5,19 +5,10 @@ commands:
     housereg:
         description: /houserega [ApartmentName] [Player name]
         usage:
-    select:
-        description: only use /select when told to!
-        usage:
-    facepalm:
-        description: Faceplam with the power of 1000 suns.
-        usage:
-    hacks:
-        description: Hacks the server and allows you to spawn items and fly.
-        usage:
     ragequit:
         description: RAGE!!!!!!!!!!!!!
         usage:
-    givemeOP:
-        description: Good Job Finding This Command! It makes you OP!
+    houseforsale:
+        description: put a house for sale
         usage:
   

@@ -38,6 +38,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 			if(sender.isOp() && args.length == 1) {
 				houseName = args[0];
 				playerListener.isCreatingHouse = true;
+				playerListener.houseName = houseName;
 				sender.sendMessage("Creating Apartment at: " + args[0] + ". Left click door to register.");
 				return true;
 			}

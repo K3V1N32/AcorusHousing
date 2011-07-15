@@ -22,8 +22,7 @@ import com.K3V1N32.AcorusHousing.CommandExecutor;
 public class AcorusHousingPlayerListener extends PlayerListener {
 	private final AcorusHousing plugin;
 	public boolean isCreatingHouse = false;
-	public boolean isSelectingCuboid = false;
-	public String houseName = "Default";
+	public String houseName;
 	public Plugin myPlugin;
     HouseConfig hConfig;
 
@@ -50,18 +49,16 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     	
     	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.WOODEN_DOOR)) {
     		//§
+    		hConfig = new HouseConfig();
     		if(isCreatingHouse) {
     			isCreatingHouse = false;
-    			isSelectingCuboid = true;
-    			event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been Registered");
-    			event.getPlayer().sendMessage("Please select the Apartment Cuboid then type /select");
-    		} else {
-    			//do nothing lol
+    			
+    			if(hConfig.addHouse(houseName, event.getClickedBlock())) {
+    				event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been Registered");
+    			} else {
+    				event.getPlayer().sendMessage("The Region " + houseName + " has already been registered!");
+    			}
     		}
-    		
-    	}
-    	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.IRON_DOOR_BLOCK)) {
-    		//§
     		
     	}
     	

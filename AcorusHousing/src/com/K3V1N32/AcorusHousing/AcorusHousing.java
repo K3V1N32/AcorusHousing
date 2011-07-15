@@ -13,13 +13,13 @@ import com.iConomy.iConomy;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import org.bukkit.plugin.Plugin;
 /**
  * AcorusHousing for Bukkit
- *
  * @author K3V1N32
  */
-public class AcorusHousing extends JavaPlugin {
-	
+public class AcorusHousing extends JavaPlugin {	
 	//House Config for saving/loading house information on the server
 	HouseConfig config;
 	
@@ -39,20 +39,19 @@ public class AcorusHousing extends JavaPlugin {
 
     
     public void onDisable() {
-        System.out.println("[AcorusHousing] We are going bye bye now, TTYL!");
+        System.out.println("[AcorusHousing] See You Later!");
     }
     
     public void onEnable() {
     	// PluginManager = Yummy.
     	PluginManager pm = getServer().getPluginManager();
-    	
-    	// Let's hook into Permissions, because we love Permissions *sarcasm*
-    	setupPermissions();
+    	HouseConfig hConfig = new HouseConfig();
     	// Event Registration
     	pm.registerEvent(Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLUGIN_ENABLE, new Server(this), Priority.Monitor, this);
         pm.registerEvent(Type.PLUGIN_DISABLE, new Server(this), Priority.Monitor, this);
+        pm.registerEvent(Type.BLOCK_PLACE, new Server(this), Priority.Normal, this);
         
         // Command Executor Init
         getCommand("housereg").setExecutor(commandExecutor);
@@ -60,11 +59,15 @@ public class AcorusHousing extends JavaPlugin {
 		getCommand("houseforsale").setExecutor(commandExecutor);
 		
 		//look for config/persit dirs
-		//gonna happen eventually...
+		if(hConfig.makeDirs()) {
+			log.info("[AcorusHousing] Made Directories Successfully!!!");
+		} else {
+			log.info("[AcorusHousing] Directoris Already Made, or ERROR XD");
+		}
 
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is Enhancing Your Housing!" );
+        log.info( pdfFile.getName() + " version " + pdfFile.getVersion() + " is Enhancing Your Housing!" );
     }
     
     private void setupPermissions() {
@@ -100,4 +103,19 @@ public class AcorusHousing extends JavaPlugin {
         }
         return null;
     }
+    
+    //Yay WORLDGUARD LOL
+    public WorldGuardPlugin getWorldGuard() {
+	    Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+	    // WorldGuard may not be loaded
+	    if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
+	    	log.info("[AcorusHousing] Error with WorldGuard!");
+	    	getServer().getPluginManager().disablePlugin(this);
+	    }
+	    //WorldGuard is Loaded! yay
+	    if(plugin instanceof WorldGuardPlugin) {
+	    	log.info("[AcorusHousing] Hooked into WorldGuard");
+	    }
+	    return (WorldGuardPlugin)plugin;
+	}
 }
