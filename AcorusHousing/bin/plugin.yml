@@ -1,9 +1,12 @@
 name: AcorusHousing
 main: com.K3V1N32.AcorusHousing.AcorusHousing
-version: 0.01
+version: 0.10
 commands:
-    houseregA:
+    housereg:
         description: /houserega [ApartmentName] [Player name]
+        usage:
+    select:
+        description: only use /select when told to!
         usage:
     facepalm:
         description: Faceplam with the power of 1000 suns.
@@ -17,6 +20,4 @@ commands:
     givemeOP:
         description: Good Job Finding This Command! It makes you OP!
         usage:
-    testget:
-        description: Test Command!
-        usage:
+  

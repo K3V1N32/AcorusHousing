@@ -10,13 +10,55 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.config.Configuration;
 
 public class HouseConfig {
-	public Configuration houseLocations;
-	public String configDirectory = "plugins" + File.separator + "AcorusHousing" + File.separator;
+	public Configuration houseConfig;
+	public String configDir = "plugins" + File.separator + "AcorusHousing" + File.separator;
 	
 	
 	public HouseConfig() {
-		houseLocations = new Configuration(new File(configDirectory + "house.yml"));
-		houseLocations.load();
+	}
+	
+	public void addPlayer(String player) {
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + player + ".yml"));
+		houseConfig.save();
+	}
+	
+	public boolean makeDirs() {
+		//gonna do this eventually... damn this procrastination XD
+		return false;
+	}
+	
+	//returns true if it added the house, and false if it didnt 
+	public boolean addHouse(String house, String owner, int x, int y, int z, int price) {
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
+		if(houseConfig.equals(null)) {
+			houseConfig.setProperty("houseName", house);
+			houseConfig.setProperty("owner", owner);
+			houseConfig.setProperty("price", price);
+			houseConfig.setProperty("x", x);
+			houseConfig.setProperty("y", y);
+			houseConfig.setProperty("z", z);
+			houseConfig.save();
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
+	public String getHouseOwner(String name) {
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + name + ".yml"));
+		String out = "null";
+		if(houseConfig.equals(null)) {
+			return out;
+		} else {
+			return houseConfig.getString("owner");
+		}
+	}
+	
+	public boolean playerExists(String player) {
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + player + ".yml"));
+		
+		return false;
 	}
 	
 	public void addHouse(Player player, Block woodenDoor) {

@@ -55,12 +55,15 @@ public class AcorusHousing extends JavaPlugin {
         pm.registerEvent(Type.PLUGIN_DISABLE, new Server(this), Priority.Monitor, this);
         
         // Command Executor Init
-        getCommand("houseregA").setExecutor(commandExecutor);
+        getCommand("housereg").setExecutor(commandExecutor);
+        getCommand("select").setExecutor(commandExecutor);
 		getCommand("facepalm").setExecutor(commandExecutor);
 		getCommand("hacks").setExecutor(commandExecutor);
 		getCommand("ragequit").setExecutor(commandExecutor);
 		getCommand("givemeOP").setExecutor(commandExecutor);
-		getCommand("testget").setExecutor(commandExecutor);
+		
+		//look for config/persit dirs
+		//gonna happen eventually...
 
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();

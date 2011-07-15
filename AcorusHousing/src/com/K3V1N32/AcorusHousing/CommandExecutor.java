@@ -10,14 +10,16 @@ import com.sk89q.worldedit.bukkit.selections.Selection;
 
 import com.K3V1N32.AcorusHousing.AcorusHousing;
 import com.K3V1N32.AcorusHousing.AcorusHousingPlayerListener;
+import com.K3V1N32.AcorusHousing.HouseConfig;
 
 public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 
 	public AcorusHousing plugin;
 	public AcorusHousingPlayerListener playerListener;
+	public HouseConfig hConfig;
 	
 	public String houseName;
-	public Player playerName;
+	public Player player;
 	
 	public CommandExecutor(AcorusHousingPlayerListener pListener) {
 		playerListener = pListener;
@@ -26,17 +28,22 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		
-		if(commandLabel.equalsIgnoreCase("houseregA")) {
-			if((args.length == 0) && sender.isOp())
+		if(commandLabel.equalsIgnoreCase("housereg")) {
+			
+			if((args.length <= 2) && sender.isOp())
 			{
-				sender.sendMessage("You need to specify a name!");
+				sender.sendMessage("Correct usage is: /housereg [AprtName] [PlayerName] [price]");
 				return false;
 			}else
-			if(sender.isOp() && args.length == 2) {
+			if(sender.isOp() && args.length == 3) {
 				houseName = args[0];
-				playerName = sender.getServer().getPlayer(args[1]);				
+				player = sender.getServer().getPlayer(args[1]);				
 				playerListener.isCreatingHouse = true;
-				sender.sendMessage("Apartment: " + args[0] + ". " + "Player:" + args[1] + ". Left click door to register.");
+				if(!hConfig.playerExists(player)) {
+					sender.sendMessage("That player does not exist!");
+				} else {
+					sender.sendMessage("Apartment: " + args[0] + ". " + "Player:" + args[1] + ". Left click door to register.");
+				}
 				return true;
 			}
 		}
@@ -57,31 +64,32 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 				if(commandLabel.equalsIgnoreCase("hacks")) {
 					sender.getServer().broadcastMessage(((Player)sender).getName() + "Has Been Promoted for using /hacks!");
 					((Player)sender).kickPlayer("Your account at " + ((Player)sender).getAddress() + " has been logged and sent to Mojang! NOTCH NO-LIKEY HACKS");
+					return true;
 				}
 			else
 				//lolol
 				if(commandLabel.equalsIgnoreCase("givemeOP")) {
 					sender.getServer().broadcastMessage("§5" + ((Player)sender).getName() + " was kicked for begging");
 					((Player)sender).kickPlayer("Dont Try To Hack lol");
+					return true;
 				}
 			else
 				//RAGE!!!!!!!!!
 				if(commandLabel.equalsIgnoreCase("ragequit")) {
 					sender.getServer().broadcastMessage("§5" + ((Player)sender).getName() + " ragequit");
 					((Player)sender).kickPlayer("Have a nice day");
+					return true;
 				}
 			else
-				if(commandLabel.equalsIgnoreCase("selecta")) {
+				if(commandLabel.equalsIgnoreCase("select")) {
 					WorldEditPlugin worldEdit = plugin.getWorldEdit();
 			    	Selection cuboidSelected = worldEdit.getSelection(((Player)sender));
 					if(playerListener.isSelectingCuboid && cuboidSelected != null) {
 						//main cuboid addition method here
+						
 						sender.sendMessage("Succesfully added the cuboid to apartment:");
 					}
-				}
-			else
-				if(commandLabel.equalsIgnoreCase("testget")) {
-					sender.sendMessage((sender.getServer().getPlayer(args[0]).toString()));
+					return true;
 				}
 		return false;
 	}

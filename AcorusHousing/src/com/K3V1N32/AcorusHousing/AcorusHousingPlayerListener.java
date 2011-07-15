@@ -7,6 +7,8 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.material.Door;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
@@ -33,7 +35,8 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     public void onPlayerJoin(PlayerJoinEvent event) {
 		// Lets create the users house log for admins to know who placed which door :D.
     	hConfig = new HouseConfig();
-    }
+		hConfig.addPlayer(event.getPlayer().getName());
+	}
     
     public void onPlayerInteract(PlayerInteractEvent event) {
     	WorldEditPlugin worldEdit = plugin.getWorldEdit();
@@ -51,10 +54,14 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     			isCreatingHouse = false;
     			isSelectingCuboid = true;
     			event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been Registered");
-    			event.getPlayer().sendMessage("Please select the Apartment Cuboid then type /selectA");
+    			event.getPlayer().sendMessage("Please select the Apartment Cuboid then type /select");
     		} else {
     			//do nothing lol
     		}
+    		
+    	}
+    	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.IRON_DOOR_BLOCK)) {
+    		//§
     		
     	}
     	
