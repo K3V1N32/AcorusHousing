@@ -20,6 +20,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 	
 	public String houseName;
 	public String player;
+	public int price;
 	
 	public CommandExecutor(AcorusHousingPlayerListener pListener) {
 		playerListener = pListener;
@@ -37,7 +38,8 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 			}else
 			if(sender.isOp() && args.length == 3) {
 				houseName = args[0];
-				player = ((Player)sender).getName();				
+				player = args[1];
+				price = Integer.parseInt(args[2]);
 				playerListener.isCreatingHouse = true;
 				if(!hConfig.playerExists(player)) {
 					sender.sendMessage("That player does not exist!");

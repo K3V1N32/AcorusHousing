@@ -20,7 +20,7 @@ public class HouseConfig {
 	}
 	
 	public void addPlayer(String player) {
-		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + player + ".yml"));
+		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
 		houseConfig.save();
 	}
 	
@@ -66,16 +66,13 @@ public class HouseConfig {
 		doorVec.setY(y);
 		doorVec.setZ(z);
 		return doorVec;
-		
 	}
 	
+	//false if player dosent exist!
 	public boolean playerExists(String player) {
-		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + player + ".yml"));
-		if(houseConfig.equals(null)) {
-			return false;
-		} else {
-			return true;
-		}
+		File file = new File(configDir + player + ".yml");
+		boolean exists = file.exists();
+		return exists;
 	}
 	
 	public void addHouse(Player player, Block woodenDoor) {
