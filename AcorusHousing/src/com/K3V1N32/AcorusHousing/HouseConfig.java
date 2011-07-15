@@ -62,7 +62,7 @@ public class HouseConfig {
 	}
 	
 	//set a houses price :$
-	public boolean setDoorPrice(String house, int price) {
+	public boolean setDoorPrice(String house, String price) {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
@@ -86,7 +86,7 @@ public class HouseConfig {
 		if(houseFile.exists()) {
 			String houseName = houseConfig.getString("houseName");
 			Block door = (Block)houseConfig.getProperty("door");
-			int price = houseConfig.getInt("price", 0);
+			int price = Integer.parseInt(houseConfig.getString("price"));
 			houseConfig.setProperty("houseName", houseName);
 			houseConfig.setProperty("door", door);
 			houseConfig.setProperty("price", price);

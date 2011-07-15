@@ -54,12 +54,22 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 			} else
 			if(args.length == 3 && args[0].equals("forsale")) {
 				if(hConfig.houseExists(args[1])) {
-					int price = Integer.parseInt(args[2]);
-					hConfig.setDoorPrice(args[1], price);
-					sender.sendMessage("Set price for " + args[1] + " to " + price);
+					hConfig.setDoorPrice(args[1], args[2]);
+					sender.sendMessage("Set price for " + args[1] + " to " + args[2]);
 					return true;
 				} else {
 					sender.sendMessage("No House Exists! :O");
+				}
+			} else
+			if(args.length == 1 && args[0].equalsIgnoreCase("remove")) {
+				if(hConfig.houseExists(args[1])) {
+					if(hConfig.remDoor(args[1])) {
+						sender.sendMessage("Succesfully Deleted house at: " + args[1]);
+					} else {
+						sender.sendMessage("Error While Deleting house!");
+					}
+				} else {
+					sender.sendMessage("House dosent exist!!!!");
 				}
 			}
 			}

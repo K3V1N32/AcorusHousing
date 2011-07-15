@@ -16,6 +16,7 @@ import org.bukkit.material.Door;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 
+import com.iConomy.iConomy;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 
@@ -29,6 +30,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
 	public boolean isCreatingHouse = false;
 	public String houseName;
 	public Plugin myPlugin;
+	public List<String> owners;
     HouseConfig hConfig;
 
     public AcorusHousingPlayerListener(AcorusHousing instance, HouseConfig config) {
@@ -87,15 +89,58 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		sign.setLine(3, "");
     		    		sign.update();
     		    	}
+    		    } else if(sign.getLine(1).equalsIgnoreCase("[forsale]")) {
+    		    	houseName = sign.getLine(0);
+    		    	owners = hConfig.getDoorOwners(houseName);
+    		    	if(hConfig.houseExists(houseName)) {
+    		    		
+    		    	}
+	    			sign.setLine(0, houseName);
+		    		sign.setLine(1, "Owner:");
+		    		sign.setLine(2, owners.get(0));
+		    		sign.setLine(3, "");
+		    		sign.update();
     		    }
     		}
     		}
     	}
+    	
+    	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && (event.getClickedBlock().getType().equals(Material.SIGN_POST) || event.getClickedBlock().getType().equals(Material.WALL_SIGN))) {
+    		hConfig = new HouseConfig();
+    		BlockState state = event.getClickedBlock().getState();
+    		if (state instanceof Sign) {
+    		    Sign sign = (Sign)state;
+    		    if(sign.getLine(1).equalsIgnoreCase("[forsale]")) {
+    		    	houseName = sign.getLine(0);
+    		    	int price = hConfig.getDoorPrice(houseName);
+    		    	if(hConfig.houseExists(houseName)) {
+    		    		owners = hConfig.getDoorOwners(houseName);
+    		    		if(owners.isEmpty() && (iConomy.getAccount(event.getPlayer().getName()).getHoldings().balance() >= price)) {
+    		    			hConfig.addDoorOwner(event.getPlayer().getName(), houseName);
+    		    			event.getPlayer().sendMessage("You Have Successfully bought the house at: " + houseName + "for $" + price);
+    		    			owners = hConfig.getDoorOwners(houseName);
+    		    			sign.setLine(0, houseName);
+        		    		sign.setLine(1, "Owner:");
+        		    		sign.setLine(2, owners.get(0));
+        		    		sign.setLine(3, "");
+        		    		sign.update();
+    		    		} else if(!owners.isEmpty()) {
+    		    			event.getPlayer().sendMessage("Someone already owns that house please alert and admin of this sign!");
+    		    		} else if(owners.isEmpty() && !(iConomy.getAccount(event.getPlayer().getName()).getHoldings().balance() >= price)) {
+    		    			event.getPlayer().sendMessage("You dont have enough money to buy this house!");
+    		    		} else {
+    		    			event.getPlayer().sendMessage("Error!!!!");
+    		    		}
+    		    	}
+    		    }
+    		}
+    	}
+    	
     	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.IRON_DOOR_BLOCK)) {
     		event.getPlayer().sendMessage("Its a door fo sho WTF!");
-    		
-    		if (event.getClickedBlock() instanceof Door) {
-    		    Door door = (Door)event.getClickedBlock();
+    		BlockState state = event.getClickedBlock().getState();
+    		if (state instanceof Door) {
+    		    Door door = (Door)state;
     		    if(door.isOpen()) {
     		    	door.setOpen(false);
     		    } else {
