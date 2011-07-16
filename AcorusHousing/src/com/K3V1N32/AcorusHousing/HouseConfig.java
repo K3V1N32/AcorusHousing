@@ -9,6 +9,7 @@ import org.bukkit.util.config.Configuration;
 public class HouseConfig {
 	public Configuration houseConfig;
 	public List<String> owners;
+	public List<String> houses;
 	public String configDir = "plugins" + File.separator + "AcorusHousing" + File.separator;
 	
 	//Yes, i know this is the largest mess of crap ever, but it works XD :P
@@ -19,6 +20,11 @@ public class HouseConfig {
 	public void addPlayer(String player) {
 		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
 		houseConfig.save();
+	}
+	
+	public void addHouseToPlayer(String player, String house) {
+		File playerFile = new File(configDir + "players" + File.separator + player + ".yml");
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 	}
 	
 	//returns true if it added the house, and false if the house already exists
@@ -50,15 +56,15 @@ public class HouseConfig {
 	}
 	
 	//get a door price >:$
-	public int getDoorPrice(String house) {
+	public String getDoorPrice(String house) {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
 			houseConfig.load();
-			int price = houseConfig.getInt("price", 0);
+			String price = houseConfig.getString("price");
 			return price;
 		}
-		return 31337;
+		return null;
 	}
 	
 	//set a houses price :$
@@ -112,6 +118,24 @@ public class HouseConfig {
 		}
 		return false;
 	}
+	
+	//checks to see if the player is the houses owner
+	public boolean isDoorOwner(String house, String player) {
+		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
+		if(houseFile.exists()) {
+			houseConfig.getStringList("owners", owners);
+			if(owners.get(0).contains(player)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	
 	//remove a house (yea i know i'm using 'door' XD
 	public boolean remDoor(String house) {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");

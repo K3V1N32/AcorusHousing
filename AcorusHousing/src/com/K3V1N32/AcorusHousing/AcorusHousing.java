@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.iConomy.iConomy;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.plugin.Plugin;
 /**
@@ -30,22 +29,24 @@ public class AcorusHousing extends JavaPlugin {
 	// Logging.
 	Logger log = Logger.getLogger("Minecraft");
 
-	// Event Listener
+	// Event Listeners
     private final AcorusHousingPlayerListener playerListener = new AcorusHousingPlayerListener(this, config);
     private final AcorusHousingBlockListener blockListener = new AcorusHousingBlockListener(this);
     
     // Command Executor
-    CommandExecutor commandExecutor = new CommandExecutor(playerListener);
+    CommandExecutor commandExecutor = new CommandExecutor(playerListener, this);
 
     
+    
+    //onDisable
     public void onDisable() {
-        System.out.println("[AcorusHousing] See You Later!");
+        log.info("[AcorusHousing] See You Later!");
     }
     
+    //onEnable
     public void onEnable() {
     	// PluginManager = Yummy.
     	PluginManager pm = getServer().getPluginManager();
-    	HouseConfig hConfig = new HouseConfig();
     	// Event Registration
     	pm.registerEvent(Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
@@ -75,37 +76,15 @@ public class AcorusHousing extends JavaPlugin {
         permissionHandler = ((Permissions) permissionsPlugin).getHandler();
         log.info("[AcorusHousing] Found and will use plugin "+((Permissions)permissionsPlugin).getDescription().getFullName());
     }
-    
-    
-    // WorldEdit - Yummy functions to get cuboid selections to register to doors. Should make life a lot easier.
-    public WorldEditPlugin getWorldEdit() {
-        Plugin worldEdit = getServer().getPluginManager().getPlugin("WorldEdit");
-        if (worldEdit == null) {
-            log.info("[AcorusHousing] WorldEdit doesn't appear to be enabled. ERRRORRRR!");
-            getServer().getPluginManager().disablePlugin(this);
+    //Yay WORLDGUARD LOL P.S. I HATE WORLDGUARD WITH A PASSION >:U
+    public WorldGuardPlugin getWorldGuard() {
+        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+     
+        // WorldGuard may not be loaded
+        if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
+            return null; // Maybe you want throw an exception instead
         }
-        
-        if (worldEdit instanceof WorldEditPlugin) {
-            return (WorldEditPlugin) worldEdit;
-        } else {
-            log.info("[AcorusHousing] WorldEdit doesn't appear to be enabled. ERRRORRRR!");
-            getServer().getPluginManager().disablePlugin(this);
-        }
-        return null;
+        return (WorldGuardPlugin) plugin;
     }
     
-    //Yay WORLDGUARD LOL
-    public WorldGuardPlugin getWorldGuard() {
-	    Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
-	    // WorldGuard may not be loaded
-	    if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
-	    	log.info("[AcorusHousing] Error with WorldGuard!");
-	    	getServer().getPluginManager().disablePlugin(this);
-	    }
-	    //WorldGuard is Loaded! yay
-	    if(plugin instanceof WorldGuardPlugin) {
-	    	log.info("[AcorusHousing] Hooked into WorldGuard");
-	    }
-	    return (WorldGuardPlugin)plugin;
-	}
 }
