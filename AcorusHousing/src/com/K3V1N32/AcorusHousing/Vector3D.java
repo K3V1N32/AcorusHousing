@@ -1,5 +1,7 @@
 package com.K3V1N32.AcorusHousing;
 
+import org.bukkit.block.Block;
+
 public class Vector3D {
 	public int x;
 	public int y;

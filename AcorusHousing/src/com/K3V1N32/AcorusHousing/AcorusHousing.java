@@ -56,6 +56,16 @@ public class AcorusHousing extends JavaPlugin {
         // Command Executor Init
         getCommand("house").setExecutor(commandExecutor);
 		getCommand("ragequit").setExecutor(commandExecutor);
+		
+		//houseConfig
+		config = new HouseConfig();
+		if(config.isConfigMade()) {
+			log.info("[AcorusHousing] Config Found!");
+		} else {
+			config.createConfigFile();
+			log.info("[AcorusHousing] Config Made Successfully! Welcome to Acorus Housing!");
+		}
+		
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();
         log.info( pdfFile.getName() + " version " + pdfFile.getVersion() + " is Enhancing Your Housing!" );
