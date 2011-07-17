@@ -54,10 +54,10 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		hConfig = new HouseConfig();
     		if(isCreatingHouse) {
     			isCreatingHouse = false;
-    			if(hConfig.addHouse(houseName, event.getClickedBlock())) {
+    			if(hConfig.addHouse(houseName)) {
     				event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been Registered");
     			} else {
-    				event.getPlayer().sendMessage("The Region " + houseName + " has already been registered!");
+    				event.getPlayer().sendMessage("The House " + houseName + " has already been registered!");
     			}
     		}
     	}
@@ -102,7 +102,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		sign.setLine(3, "");
     		    		sign.update();
     		    	} else if(isUpdating) {
-    		    		event.getPlayer().sendMessage("and your done, or not");
+    		    		event.getPlayer().sendMessage("...and your done, or not");
     		    	} else {
     		    		
     		    	}
@@ -122,7 +122,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		owners = hConfig.getDoorOwners(houseName);
     		    		if(owners.isEmpty() && (iConomy.getAccount(event.getPlayer().getName()).getHoldings().balance() >= price)) {
     		    			hConfig.addDoorOwner(event.getPlayer().getName(), houseName);
-    		    			iConomy.getAccount(event.getPlayer().getName()).getHoldings().add(-price);
+    		    			iConomy.getAccount(event.getPlayer().getName()).getHoldings().add(-(price));
     		    			event.getPlayer().sendMessage("You bought the house at: " + houseName + "for $" + price);
     		    			owners = hConfig.getDoorOwners(houseName);
     		    			sign.setLine(0, houseName);
@@ -144,7 +144,17 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    	}
     		    }
     		}
-    	}    	
+    	} 
+    	if(isCreatingHouse) {
+    		event.getPlayer().sendMessage("Stoped Creating House!");
+    		isCreatingHouse = false;
+    	} else if(isUpdating) {
+    		event.getPlayer().sendMessage("Stoped Updating Sign!");
+    		isUpdating = false;
+    	} else if(isBuyingHouse) {
+    		event.getPlayer().sendMessage("Stoped Buying House!");
+    		isBuyingHouse = false;
+    	}
     }
 
 }

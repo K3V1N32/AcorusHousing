@@ -59,12 +59,6 @@ public class AcorusHousing extends JavaPlugin {
 		
 		//houseConfig
 		config = new HouseConfig();
-		if(config.isConfigMade()) {
-			log.info("[AcorusHousing] Config Found!");
-		} else {
-			config.createConfigFile();
-			log.info("[AcorusHousing] Config Made Successfully! Welcome to Acorus Housing!");
-		}
 		
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();

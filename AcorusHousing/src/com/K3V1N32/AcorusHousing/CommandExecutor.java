@@ -55,6 +55,8 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					if (hConfig.houseExists(args[1])) {
 						int price = Integer.parseInt(hConfig.getDoorPrice(args[1]));
 						sender.sendMessage("The price of that house is: " + price);
+						sender.sendMessage("Owners:");
+						sender.sendMessage("" + hConfig.getDoorOwners(args[1]));
 						return true;
 					} else {
 						sender.sendMessage("No House Exists! :O");
@@ -109,7 +111,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 			}
 		} else if (commandLabel.equalsIgnoreCase("ragequit")) {
 			sender.getServer().broadcastMessage("§5" + ((Player) sender).getName() + " ragequit");
-			((Player) sender).kickPlayer("Have a nice day");
+			((Player) sender).kickPlayer("Have a nice day 8)");
 			return true;
 		} else {
 			return false;

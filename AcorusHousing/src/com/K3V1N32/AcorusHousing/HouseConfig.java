@@ -11,6 +11,7 @@ public class HouseConfig {
 	public List<String> owners;
 	public List<String> houses;
 	public List<String> list;
+	public String price;
 	public String configDir = "plugins" + File.separator + "AcorusHousing" + File.separator;
 	
 	//Yes, i know this is the largest mess of crap ever, but it works XD :P
@@ -23,38 +24,14 @@ public class HouseConfig {
 		houseConfig.save();
 	}
 	
-	public boolean isConfigMade() {
-		File configFile = new File(configDir + "config" + File.separator + "config.yml");
-		if(configFile.exists()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	//creates the initial config file;
-	public void createConfigFile() {
-		houseConfig = new Configuration(new File("AcorusHousing.yml"));
-		houseConfig.setHeader("Just replace 1000 with the default house price ;P");
-		houseConfig.setProperty("defaultPrice", "1000");
-		houseConfig.save();
-	}
-	
-	//basically its the default price.
-	public String loadConfig() {
-		houseConfig = new Configuration(new File("AcorusHousing.yml"));
-		houseConfig.load();
-		return houseConfig.getString("defaultPrice");
-	}
-	
 	public boolean addHouseToPlayer(String player, String house) {
 		File playerFile = new File(configDir + "players" + File.separator + player + ".yml");
 		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
 		if(playerFile.exists()) {
 			houseConfig.load();
-			houseConfig.getStringList("owns", owners);
-			owners.add(house);
-			houseConfig.setProperty("owns", owners);
+			houses = houseConfig.getStringList("owns", houses);
+			houses.add(house);
+			houseConfig.setProperty("owns", houses);
 			houseConfig.save();
 			return true;
 		} else {
@@ -64,16 +41,15 @@ public class HouseConfig {
 	
 	//returns true if it added the house, and false if the house already exists
 	//adds a house!! YAY
-	public boolean addHouse(String house, Block door) {
+	public boolean addHouse(String house) {
 		owners = null;
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(!houseFile.exists()) {
 			houseConfig.setProperty("houseName", house);
-			houseConfig.setProperty("price", loadConfig());
+			houseConfig.setProperty("price", "1000");
 			houseConfig.setProperty("owners", owners);
 			houseConfig.save();
-			addToList("house", house);
 			return true;
 		}else {
 			return false;
@@ -91,7 +67,6 @@ public class HouseConfig {
 			houseConfig.setProperty("y", door.getY());
 			houseConfig.setProperty("z", door.getZ());
 			houseConfig.save();
-			addToList("door", house);
 			return true;
 		} else {
 			return false;
@@ -137,53 +112,9 @@ public class HouseConfig {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
-			houseConfig.load();
 			return houseConfig.getStringList("owners", owners);
 		}
 		return null;
-	}
-	
-	//add to a list!
-	//types: house, door, maybe player if i need to
-	public void addToList(String type, String name) {
-		File houseFile = new File(configDir + "lists" + File.separator + type + ".yml");
-		houseConfig = new Configuration(new File(configDir + "lists" + File.separator + type + ".yml"));
-		if(houseFile.exists()) {
-			houseConfig.getStringList("list", list);
-			list.add(name);
-			houseConfig.setProperty("list", list);
-			houseConfig.save();
-		} else {
-			list = null;
-			list.add(name);
-			houseConfig.setProperty("list", list);
-		}
-	}
-	
-	//remove something from a list
-	public void delFromList(String type, String name) {
-		File houseFile = new File(configDir + "lists" + File.separator + type + ".yml");
-		houseConfig = new Configuration(new File(configDir + "lists" + File.separator + type + ".yml"));
-		if(houseFile.exists()) {
-			houseConfig.getStringList("list", list);
-			list.remove(name);
-			houseConfig.setProperty("list", list);
-			houseConfig.save();
-		}
-	}
-	
-	//get a list
-	public List<String> getList(String type, String name) {
-		File houseFile = new File(configDir + "lists" + File.separator + type + ".yml");
-		houseConfig = new Configuration(new File(configDir + "lists" + File.separator + type + ".yml"));
-		if(houseFile.exists()) {
-			list = null;
-			houseConfig.load();
-			houseConfig.getStringList("list", list);
-			return list;
-		} else {
-			return null;
-		}
 	}
 	
 	//get a door price >:$
@@ -219,19 +150,19 @@ public class HouseConfig {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
+			houseConfig.load();
 			String houseName = houseConfig.getString("houseName");
-			Block door = (Block)houseConfig.getProperty("door");
-			int price = Integer.parseInt(houseConfig.getString("price"));
+			String price = houseConfig.getString("price");
 			houseConfig.setProperty("houseName", houseName);
-			houseConfig.setProperty("door", door);
 			houseConfig.setProperty("price", price);
-			houseConfig.getStringList("owners", owners);
+			owners = houseConfig.getStringList("owners", owners);
 			owners.add(player);
 			houseConfig.setProperty("owners", owners);
 			houseConfig.save();
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 	
 	//remove a house owner >:D
@@ -253,7 +184,7 @@ public class HouseConfig {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
-			houseConfig.getStringList("owners", owners);
+			owners = houseConfig.getStringList("owners", owners);
 			if(owners.get(0).contains(player)) {
 				return true;
 			} else {
@@ -271,8 +202,6 @@ public class HouseConfig {
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
 			houseFile.delete();
-			delFromList("house", house);
-			delFromList("door", house);
 			return true;
 		}
 		return false;
