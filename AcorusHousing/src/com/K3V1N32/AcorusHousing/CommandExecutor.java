@@ -17,6 +17,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 	public AcorusHousing plugin;
 	public AcorusHousingPlayerListener playerListener;
 	public HouseConfig hConfig;
+	public WorldGuardPlugin wPlugin;
 	
 	public String houseName;
 	public String player;

@@ -78,7 +78,7 @@ public class AcorusHousing extends JavaPlugin {
     }
     //Yay WORLDGUARD LOL P.S. I HATE WORLDGUARD WITH A PASSION >:U
     public WorldGuardPlugin getWorldGuard() {
-        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");//for some god damn reason, this line gives a null pointer exception even if worldguard is loaded >:[
      
         // WorldGuard may not be loaded
         if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
