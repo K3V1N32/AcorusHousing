@@ -50,18 +50,18 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 				} else {
 					return false;
 				}
-			} else if (args.length == 2 && args[0].equals("info")) {//anyone can use info
+			} else if (args.length == 2 && args[0].equals("info") && plugin.permissionHandler.has((Player)sender, "acorus.housing.info")) {//info
 				if (hConfig.houseExists(args[1])) {
 					int price = Integer.parseInt(hConfig.getDoorPrice(args[1]));
 					sender.sendMessage("The price of that house is: " + price);
 					sender.sendMessage("Owners:");
-					sender.sendMessage("" + hConfig.getDoorOwners(args[1]));
+					sender.sendMessage("" + hConfig.getDoorOwners(args[1]).toString());
 					return true;
 				} else {
 					sender.sendMessage("No House Exists! :O");
 					return false;
 				}
-			} else if (args.length == 2 && args[0].equals("reg")) {//only acorus.housing.admin will access this
+			} else if (args.length == 2 && args[0].equals("reg") && plugin.permissionHandler.has((Player)sender, "acorus.housing.admin")) {//only acorus.housing.admin will access this
 				houseName = args[1];
 				boolean isLegal = wPlugin.getRegionManager(((Player)sender).getWorld()).hasRegion(houseName);
 				if (!hConfig.houseExists(houseName)) {
@@ -78,7 +78,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					sender.sendMessage("That house Exists Already >:U");
 					return false;
 				}
-			} else if (args.length == 3 && args[0].equals("forsale")) {
+			} else if (args.length == 3 && args[0].equals("forsale") && plugin.permissionHandler.has((Player)sender, "acorus.housing.admin")) {//admin
 				if (hConfig.houseExists(args[1])) {
 					hConfig.setDoorPrice(args[1], args[2]);
 					sender.sendMessage("Set price for " + args[1] + " to" + args[2]);
@@ -87,7 +87,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					sender.sendMessage("No House Exists! :O");
 					return false;
 				}
-			} else if (args.length == 2	&& args[0].equalsIgnoreCase("remove")) {
+			} else if (args.length == 2	&& args[0].equalsIgnoreCase("remove") && plugin.permissionHandler.has((Player)sender, "acorus.housing.admin")) {//admin
 				if (hConfig.houseExists(args[1])) {
 					if (hConfig.remDoor(args[1])) {
 						sender.sendMessage("Succesfully Deleted house at: "	+ args[1]);
@@ -100,12 +100,20 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					sender.sendMessage("House dosent exist!!!!");
 					return false;
 				}
-			} else if (args.length == 1	&& args[0].equalsIgnoreCase("update")) {
+			} else if (args.length == 1	&& args[0].equalsIgnoreCase("update") && plugin.permissionHandler.has((Player)sender, "acorus.housing.admin")) {//admin
 				playerListener.isUpdating = true;
 				sender.sendMessage("Right Click sign to update");
 				return true;
+			} else if(args.length == 2 && args[0].equalsIgnoreCase("givekey")) {//create
+				if(plugin.permissionHandler.has((Player)sender, "acorus.housing.create")) {
+					//will be implemented as soon as i can reach the stringlists >_>
+				}				
+			} else if(args.length == 2 && args[0].equalsIgnoreCase("takekey")) {//remove
+				if(plugin.permissionHandler.has((Player)sender, "acorus.housing.remove")) {
+					//^  ^  ^  ^  ^  ^  ^  ^  ^  ^  ^  ^  ^  ^
+				}				
 			}
-		} else if (commandLabel.equalsIgnoreCase("ragequit")) {
+		} else if (commandLabel.equalsIgnoreCase("ragequit") && plugin.permissionHandler.has((Player)sender, "acorus.housing.ragequit")) {
 			sender.getServer().broadcastMessage("§5" + ((Player) sender).getName() + " ragequit");
 			((Player) sender).kickPlayer("Have a nice day 8)");
 			return true;
