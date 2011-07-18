@@ -11,6 +11,8 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.inventory.ItemStack;
+
 import java.util.Timer;
 
 import org.bukkit.material.Door;
@@ -19,6 +21,9 @@ import org.bukkit.plugin.Plugin;
 
 import com.iConomy.iConomy;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+
+import com.nijiko.permissions.PermissionHandler;
+import com.nijikokun.bukkit.Permissions.Permissions;
 
 import com.K3V1N32.AcorusHousing.CommandExecutor;
 /**
@@ -33,13 +38,11 @@ public class AcorusHousingPlayerListener extends PlayerListener {
 	public boolean isBuyingHouse = false;
 	public boolean isUpdating = false;
 	public String houseName;
-	public Plugin myPlugin;
 	public List<String> owners;
     HouseConfig hConfig;
 
     public AcorusHousingPlayerListener(AcorusHousing instance, HouseConfig config) {
     	plugin = instance;
-    	this.myPlugin = plugin;
     }
     
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -52,6 +55,11 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.WOODEN_DOOR)) {
     		//§
     		hConfig = new HouseConfig();
+    		BlockState state = event.getClickedBlock().getState();
+    		if (state instanceof Door) {
+    		    Door door = (Door)state;
+    		    door.setOpen(false);
+    		} else
     		if(isCreatingHouse) {
     			isCreatingHouse = false;
     			if(hConfig.addHouse(houseName)) {
@@ -87,7 +95,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    	houseName = sign.getLine(0);
     		    	owners = hConfig.getDoorOwners(houseName);
     		    	//update :P
-    		    	if(hConfig.houseExists(houseName) && isUpdating && owners.get(0) == null) {
+    		    	if(hConfig.houseExists(houseName) && isUpdating && owners.size() == 0) {
     		    		int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
     		    		sign.setLine(0, houseName);
     		    		sign.setLine(1, "[forsale]");
@@ -95,7 +103,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		sign.setLine(3, "/house buy");
     		    		sign.update();
     		    		isUpdating = false;
-    		    	} else if(!owners.isEmpty()) {
+    		    	} else if(!(owners.size() == 0)) {
     		    		sign.setLine(0, houseName);
     		    		sign.setLine(1, "Owner:");
     		    		sign.setLine(2, owners.get(0));
@@ -144,7 +152,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    	}
     		    }
     		}
-    	} 
+    	} else
     	if(isCreatingHouse) {
     		event.getPlayer().sendMessage("Stoped Creating House!");
     		isCreatingHouse = false;

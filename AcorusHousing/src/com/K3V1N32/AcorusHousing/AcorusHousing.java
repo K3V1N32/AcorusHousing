@@ -22,6 +22,9 @@ public class AcorusHousing extends JavaPlugin {
 	//House Config for saving/loading house information on the server
 	HouseConfig config;
 	
+	//check if permissions is here
+	public boolean isPerm = false;
+	
 	// iConomy and Permissions
 	public iConomy iConomy = null;
 	public static PermissionHandler permissionHandler;
@@ -59,6 +62,9 @@ public class AcorusHousing extends JavaPlugin {
 		
 		//houseConfig
 		config = new HouseConfig();
+		
+		//setup perms
+		setupPermissions();
 		
         // Heellllooooo CraftBukkit!
         PluginDescriptionFile pdfFile = this.getDescription();

@@ -29,7 +29,7 @@ public class HouseConfig {
 		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
 		if(playerFile.exists()) {
 			houseConfig.load();
-			houses = houseConfig.getStringList("owns", houses);
+			houses = houseConfig.getStringList("owns", null);
 			houses.add(house);
 			houseConfig.setProperty("owns", houses);
 			houseConfig.save();
@@ -76,7 +76,7 @@ public class HouseConfig {
 	//does a door exist? you get the picture...
 	public boolean doorExists(String house) {
 		File houseFile = new File(configDir + "doors" + File.separator + house + "door.yml");
-		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
+		houseConfig = new Configuration(new File(configDir + "doors" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
 			return true;
 		} else {
@@ -93,7 +93,6 @@ public class HouseConfig {
 			int x = 0;
 			int y = 0;
 			int z = 0;
-			houseConfig.load();
 			houseConfig.getInt("x", x);
 			houseConfig.getInt("y", y);
 			houseConfig.getInt("z", z);
@@ -112,7 +111,8 @@ public class HouseConfig {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
-			return houseConfig.getStringList("owners", owners);
+			owners = houseConfig.getStringList("owners", null);
+			return owners;
 		}
 		return null;
 	}
@@ -135,7 +135,7 @@ public class HouseConfig {
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
 			String houseName = houseConfig.getString("houseName");
-			owners = houseConfig.getStringList("owners", owners);
+			owners = houseConfig.getStringList("owners", null);
 			houseConfig.setProperty("houseName", houseName);
 			houseConfig.setProperty("price", price);
 			houseConfig.setProperty("owners", owners);
@@ -155,7 +155,7 @@ public class HouseConfig {
 			String price = houseConfig.getString("price");
 			houseConfig.setProperty("houseName", houseName);
 			houseConfig.setProperty("price", price);
-			owners = houseConfig.getStringList("owners", owners);
+			owners = houseConfig.getStringList("owners", null);
 			owners.add(player);
 			houseConfig.setProperty("owners", owners);
 			houseConfig.save();
@@ -170,7 +170,7 @@ public class HouseConfig {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
-			owners = houseConfig.getStringList("owners", owners);
+			owners = houseConfig.getStringList("owners", null);
 			owners.remove(player);
 			houseConfig.setProperty("owners", owners);
 			houseConfig.save();
@@ -184,7 +184,7 @@ public class HouseConfig {
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(houseFile.exists()) {
-			owners = houseConfig.getStringList("owners", owners);
+			owners = houseConfig.getStringList("owners", null);
 			if(owners.get(0).contains(player)) {
 				return true;
 			} else {
