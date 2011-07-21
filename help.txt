@@ -18,7 +18,7 @@
 /house takekey (house address) (player) _-=Takes a key from specified player for a house=-_ //owner or |acorus.housing.admin|
 
 ==About==
-Acorus Housing is a bukkit housing plugin that uses worldguard and permissions to make it easier for players to buy apartments/houses and takes some stress of admins/staff for setting up houses for players
+Acorus Housing is a housing plugin that uses world guard and permissions to make it easier for players to buy apartments/houses
 
 ==How to use==
 1. Server staff creates a(n) apartment/house and would like for players to be allowed to buy it, but does not want to have to be on at the same time as the player for the player to purchase the house.

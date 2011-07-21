@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.iConomy.iConomy;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.plugin.Plugin;
 /**
@@ -58,8 +59,6 @@ public class AcorusHousing extends JavaPlugin {
         
         // Command Executor Init
         getCommand("house").setExecutor(commandExecutor);
-		getCommand("ragequit").setExecutor(commandExecutor);
-		
 		//houseConfig
 		config = new HouseConfig();
 		
@@ -86,7 +85,17 @@ public class AcorusHousing extends JavaPlugin {
         permissionHandler = ((Permissions) permissionsPlugin).getHandler();
         log.info("[AcorusHousing] Found and will use plugin "+((Permissions)permissionsPlugin).getDescription().getFullName());
     }
-    //Yay WORLDGUARD LOL P.S. I HATE WORLDGUARD WITH A PASSION >:U
+    //for saving cuboids lol
+    public WorldEditPlugin getWorldEdit() {
+        Plugin plugin = getServer().getPluginManager().getPlugin("WorldEdit");//for some god damn reason, this line gives a null pointer exception even if worldguard is loaded >:[
+     
+        // WorldGuard may not be loaded
+        if (plugin == null || !(plugin instanceof WorldEditPlugin)) {
+            return null; // Maybe you want throw an exception instead
+        }
+        return (WorldEditPlugin) plugin;
+    }
+    //Yay WORLDGUARD LOL
     public WorldGuardPlugin getWorldGuard() {
         Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");//for some god damn reason, this line gives a null pointer exception even if worldguard is loaded >:[
      

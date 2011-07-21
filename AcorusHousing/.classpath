@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Documents and Settings/Kevin/Desktop/xResourcex/Resources/iConomy.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/Kevin/Desktop/xResourcex/Resources/Permissions.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/Kevin/Desktop/xResourcex/Resources/WorldGuard.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Kevin/Desktop/xResourcex/Resources/WorldEdit.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
