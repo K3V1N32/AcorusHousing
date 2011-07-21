@@ -3,6 +3,7 @@ package com.K3V1N32.AcorusHousing;
 import java.io.File;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.util.config.Configuration;
 
@@ -56,16 +57,18 @@ public class HouseConfig {
 		}
 	}
 	
+	public String saveLocation(Location oldLocation) {
+		return "x" + oldLocation.getBlockX() + "y" + oldLocation.getBlockY() + "z" + oldLocation.getBlockZ() + "".replace(".", "_").replace("-", "N");
+	}
+	
 	//add a door
 	//if a door already exists, then it returns false ;P
 	public boolean addDoor(String house, Block door) {
-		File houseFile = new File(configDir + "doors" + File.separator + house + "door.yml");
-		houseConfig = new Configuration(new File(configDir + "doors" + File.separator + house + ".yml"));
+		String filesave = saveLocation(door.getLocation());
+		File houseFile = new File(configDir + "doors" + File.separator + filesave + ".yml");
+		houseConfig = new Configuration(new File(configDir + "doors" + File.separator + filesave + ".yml"));
 		if(!houseFile.exists()) {
-			houseConfig.setProperty("name", house);
-			houseConfig.setProperty("x", door.getX());
-			houseConfig.setProperty("y", door.getY());
-			houseConfig.setProperty("z", door.getZ());
+			houseConfig.setProperty("house", house);
 			houseConfig.save();
 			return true;
 		} else {
@@ -85,27 +88,6 @@ public class HouseConfig {
 	}
 	
 	//get a door Vector! gets the x,y,and z of the door according to which house it belongs to
-	public Vector3D getDoorVec(String house) {
-		File houseFile = new File(configDir + "doors" + File.separator + house + "door.yml");
-		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
-		Vector3D doorVec = new Vector3D();
-		if(houseFile.exists()) {
-			houseConfig.load();
-			int x = 0;
-			int y = 0;
-			int z = 0;
-			houseConfig.getInt("x", x);
-			houseConfig.getInt("y", y);
-			houseConfig.getInt("z", z);
-			doorVec.setX(x);
-			doorVec.setY(y);
-			doorVec.setZ(z);
-			return doorVec;
-		} else {
-			doorVec = null;
-			return doorVec;
-		}
-	}
 	
 	//get a list of all the owners of a house!
 	public List<String> getDoorOwners(String house) {
