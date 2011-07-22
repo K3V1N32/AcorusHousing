@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.event.block.Action;
@@ -47,6 +48,17 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     public AcorusHousingPlayerListener(AcorusHousing instance, HouseConfig config) {
     	plugin = instance;
     }
+    public void openDoor(Block doorBlock) {
+    	Door door = (Door)doorBlock.getState().getData();
+    	if (!door.isOpen()) {
+    		byte closedData = (byte)(door.getData() + 4);
+    		doorBlock.setData(closedData);
+    		if (door.isTopHalf())
+    			openDoor(doorBlock.getFace(BlockFace.DOWN));
+    		else
+    			openDoor(doorBlock.getFace(BlockFace.UP));
+    	}
+    }
     
     public void onPlayerJoin(PlayerJoinEvent event) {
 		// Lets create the users house log for admins to know who owns which door :D.
@@ -54,10 +66,11 @@ public class AcorusHousingPlayerListener extends PlayerListener {
 		hConfig.addPlayer(event.getPlayer().getName());
 	}
     
-    public void onPlayerInteract(PlayerInteractEvent event) { 
+    public void onPlayerInteract(PlayerInteractEvent event) {
     	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.WOODEN_DOOR)) {
     		//§
     		hConfig = new HouseConfig();
+    		
     		if(isCreatingHouse) {
     			isCreatingHouse = false;
     			if(hConfig.addHouse(houseName) && hConfig.addDoor(houseName, event.getClickedBlock())) {
@@ -83,30 +96,37 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		sign.setLine(2, "§5found :(");
     		    		sign.setLine(3, "");
     		    		sign.update();
+    		    		owners = null;
     		    	}
-    		    	if(hConfig.houseExists(houseName) && owners.isEmpty()) {
-    		    		int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
-    		    		sign.setLine(0, houseName);
-    		    		sign.setLine(1, "[forsale]");
-    		    		sign.setLine(2, "§5" + "$" + price);
-    		    		sign.setLine(3, "/house buy");
-    		    		sign.update();
-    		    	} else if(!hConfig.houseExists(houseName)){
-    		    		sign.setLine(0, "");
-    		    		sign.setLine(1, "§5NO HOUSE");
-    		    		sign.setLine(2, "§5found :(");
-    		    		sign.setLine(3, "");
-    		    		sign.update();
-    		    	} else if(!owners.isEmpty()) {
-    		    		sign.setLine(0, houseName);
-    		    		sign.setLine(1, "Owner:");
-    		    		sign.setLine(2, "§5" + owners.get(0));
-    		    		sign.setLine(3, "");
-    		    		sign.update();
+    		    	if(!(owners == null)) {
+    		    		if(hConfig.houseExists(houseName) && owners.isEmpty()) {
+    		    			int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
+    		    			sign.setLine(0, houseName);
+    		    			sign.setLine(1, "[forsale]");
+    		    			sign.setLine(2, "§5" + "$" + price);
+    		    			sign.setLine(3, "/house buy");
+    		    			sign.update();
+    		    		} else if(!hConfig.houseExists(houseName)){
+    		    			sign.setLine(0, "");
+    		    			sign.setLine(1, "§5NO HOUSE");
+    		    			sign.setLine(2, "§5found :(");
+    		    			sign.setLine(3, "");
+    		    			sign.update();
+    		    		} else if(!owners.isEmpty()) {
+    		    			sign.setLine(0, houseName);
+    		    			sign.setLine(1, "Owner:");
+    		    			sign.setLine(2, "§5" + owners.get(0));
+    		    			sign.setLine(3, "");
+    		    			sign.update();
+    		    		}
+    		    	} else {
+    		    		
     		    	}
     		    } else if(sign.getLine(1).equalsIgnoreCase("[forsale]")) {
     		    	houseName = sign.getLine(0);
-    		    	owners = hConfig.getDoorOwners(houseName);
+    		    	if(hConfig.houseExists(houseName)) {
+    		    		owners = hConfig.getDoorOwners(houseName);
+    		    	} else return;
     		    	//update :P
     		    	if(hConfig.houseExists(houseName) && isUpdating && owners.isEmpty()) {
     		    		int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
@@ -138,12 +158,13 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    Sign sign = (Sign)state;
     		    if(sign.getLine(1).equalsIgnoreCase("[forsale]") && isBuyingHouse && plugin.permissionHandler.has(event.getPlayer(), "acorus.housing.buy")) {
     		    	houseName = sign.getLine(0);
-    		    	int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
     		    	String player = event.getPlayer().getName();
     		    	if(hConfig.houseExists(houseName)) {
     		    		owners = hConfig.getDoorOwners(houseName);
+    		    		int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
     		    		if(owners.isEmpty() && (iConomy.getAccount(player).getHoldings().balance() >= price)) {
     		    			hConfig.addDoorOwner(player, houseName);
+    		    			lister = null;
     		    			lister.addPlayer(player);
     		    			wPlugin.getRegionManager(event.getPlayer().getWorld()).getRegion(houseName).setOwners(lister);
     		    			iConomy.getAccount(event.getPlayer().getName()).getHoldings().add(-(price));
@@ -167,7 +188,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		}
     		    	}
     		    } else if(isBuyingHouse && sign.getLine(1).equalsIgnoreCase("[forsale]") && !plugin.permissionHandler.has(event.getPlayer(), "acorus.housing.buy")) {
-    		    	event.getPlayer().sendMessage("You dont have Permmision to Buy Houses");
+    		    	event.getPlayer().sendMessage("AccessDenied");
     		    }
     		}
     	} else

@@ -10,6 +10,7 @@ import org.bukkit.util.config.Configuration;
 public class HouseConfig {
 	public Configuration houseConfig;
 	public List<String> owners;
+	public List<String> doors;
 	public List<String> houses;
 	public List<String> list;
 	public String price;
@@ -64,9 +65,9 @@ public class HouseConfig {
 	//add a door
 	//if a door already exists, then it returns false ;P
 	public boolean addDoor(String house, Block door) {
-		String filesave = saveLocation(door.getLocation());
-		File houseFile = new File(configDir + "doors" + File.separator + filesave + ".yml");
-		houseConfig = new Configuration(new File(configDir + "doors" + File.separator + filesave + ".yml"));
+		String doorLoc = saveLocation(door.getLocation());
+		File houseFile = new File(configDir + "doors" + File.separator + doorLoc + ".yml");
+		houseConfig = new Configuration(new File(configDir + "doors" + File.separator + doorLoc + ".yml"));
 		if(!houseFile.exists()) {
 			houseConfig.setProperty("house", house);
 			houseConfig.save();
@@ -76,18 +77,73 @@ public class HouseConfig {
 		}
 	}
 	
-	//does a door exist? you get the picture...
-	public boolean doorExists(String house) {
-		File houseFile = new File(configDir + "doors" + File.separator + house + "door.yml");
-		houseConfig = new Configuration(new File(configDir + "doors" + File.separator + house + ".yml"));
-		if(houseFile.exists()) {
+	public void addDoorToList(Block door) {
+		File doorFile = new File(configDir + "lists" + File.separator + "doorList.yml");
+		houseConfig = new Configuration(new File(configDir + "lists" + File.separator + "doorList.yml"));
+		doors = null;
+		String fileName = saveLocation(door.getLocation());
+		if(doorFile.exists()) {
+			houseConfig.load();
+			doors = houseConfig.getStringList("doors", doors);
+			doors.add(fileName);
+			houseConfig.setProperty("doors", doors);
+			houseConfig.save();
+		} else {
+			doors.add(fileName);
+			houseConfig.setProperty("doors", doors);
+			houseConfig.save();
+		}
+	}
+	
+	public boolean doorExists(Block door) {
+		File doorFile = new File(configDir + "lists" + File.separator + "doorList.yml");
+		houseConfig = new Configuration(new File(configDir + "lists" + File.separator + "doorList.yml"));
+		doors = null;
+		String doorLoc = saveLocation(door.getLocation());
+		if(doorFile.exists()) {
+			if(doors.contains(doorLoc)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean remDoorFromList(Block door) {
+		File doorFile = new File(configDir + "houses" + File.separator + "doorList.yml");
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + "doorList.yml"));
+		doors = null;
+		String doorLoc = saveLocation(door.getLocation());
+		if(doorFile.exists()) {
+			houseConfig.load();
+			doors = houseConfig.getStringList("doors", doors);
+			if(doors.contains(doorLoc)) {
+				doors.remove(doorLoc);
+			} else {
+				return false;
+			}
+			houseConfig.setProperty("doors", doors);
+			houseConfig.save();
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	//get a door Vector! gets the x,y,and z of the door according to which house it belongs to
+	public String getDoorHouse(Block door) {
+		String doorLoc = saveLocation(door.getLocation());
+		File doorFile = new File(configDir + "doors" + File.separator + doorLoc + ".yml");
+		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + doorLoc + ".yml"));
+		if(doorFile.exists()) {
+			houseConfig.load();
+			String house = houseConfig.getString("house");
+			return house;
+		} else {
+			return null;
+		}		
+	}
 	
 	//get a list of all the owners of a house!
 	public List<String> getDoorOwners(String house) {
