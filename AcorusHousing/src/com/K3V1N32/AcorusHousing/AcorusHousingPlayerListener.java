@@ -8,6 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -22,6 +23,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 
 import com.iConomy.iConomy;
+import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 
@@ -48,15 +50,15 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     public AcorusHousingPlayerListener(AcorusHousing instance, HouseConfig config) {
     	plugin = instance;
     }
-    public void openDoor(Block doorBlock) {
+    public void closeDoor(Block doorBlock) {
     	Door door = (Door)doorBlock.getState().getData();
     	if (!door.isOpen()) {
     		byte closedData = (byte)(door.getData() + 4);
     		doorBlock.setData(closedData);
     		if (door.isTopHalf())
-    			openDoor(doorBlock.getFace(BlockFace.DOWN));
+    			closeDoor(doorBlock.getFace(BlockFace.DOWN));
     		else
-    			openDoor(doorBlock.getFace(BlockFace.UP));
+    			closeDoor(doorBlock.getFace(BlockFace.UP));
     	}
     }
     
@@ -67,16 +69,50 @@ public class AcorusHousingPlayerListener extends PlayerListener {
 	}
     
     public void onPlayerInteract(PlayerInteractEvent event) {
+    	if(event.getClickedBlock().getType().equals(Material.WOODEN_DOOR)) {
+    		hConfig = new HouseConfig();
+    		Block door = event.getClickedBlock();
+    		Player player1 = event.getPlayer();
+    		String player = event.getPlayer().getName();
+    		if(hConfig.doorExists(door)) {
+    			String house = hConfig.getDoorHouse(door);
+    			if(hConfig.isOwner(house, player)) {
+    				
+    			} else {
+    				player1.sendMessage("§4Access Denied");
+    				closeDoor(door);
+    			}
+    		} else if(hConfig.doorExists(door.getRelative(0, 1, 0))) {
+    			String house = hConfig.getDoorHouse(door.getRelative(0, 1, 0));
+    			if(hConfig.isOwner(house, player)) {
+    				
+    			} else {
+    				player1.sendMessage("§4Access Denied");
+    				closeDoor(door);
+    			}
+    		} else if(hConfig.doorExists(door.getRelative(0, -1, 0))) {
+    			String house = hConfig.getDoorHouse(door.getRelative(0, -1, 0));
+    			if(hConfig.isOwner(house, player)) {
+    				
+    			} else {
+    				player1.sendMessage("§4Access Denied");
+    				closeDoor(door);
+    			}
+    		}
+    	}
     	if(event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.WOODEN_DOOR)) {
     		//§
     		hConfig = new HouseConfig();
-    		
-    		if(isCreatingHouse) {
+    		if(isCreatingHouse) { 
     			isCreatingHouse = false;
-    			if(hConfig.addHouse(houseName) && hConfig.addDoor(houseName, event.getClickedBlock())) {
-    				event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been Registered");
+    			if(!hConfig.doorExists(event.getClickedBlock())) {
+    				if(hConfig.addHouse(houseName, event.getClickedBlock())) {
+    					event.getPlayer().sendMessage("§5Door at: X:" + event.getClickedBlock().getX() + "§5 Y:" + event.getClickedBlock().getY() + "§5 Z:" + event.getClickedBlock().getZ() + ": Has been Registered");
+    				} else {
+    					event.getPlayer().sendMessage("The House " + houseName + " has already been registered!");
+    				}
     			} else {
-    				event.getPlayer().sendMessage("The House " + houseName + " has already been registered!");
+    				event.getPlayer().sendMessage("That door is Already registered to a house >_>");
     			}
     		}
     	}
@@ -145,9 +181,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		isUpdating = false;
     		    	} else if(isUpdating) {
     		    		event.getPlayer().sendMessage("...and your done, or not");
-    		    	} else {
-    		    		event.getPlayer().sendMessage("Just spread chunky peanutbutter on your internet vent!");
-    		    	}
+    		    	} 
     		    }
     		}
     	}
@@ -163,12 +197,13 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		owners = hConfig.getDoorOwners(houseName);
     		    		int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
     		    		if(owners.isEmpty() && (iConomy.getAccount(player).getHoldings().balance() >= price)) {
-    		    			hConfig.addDoorOwner(player, houseName);
-    		    			lister = null;
+    		    			lister = new DefaultDomain();
     		    			lister.addPlayer(player);
+    		    			wPlugin = plugin.getWorldGuard();
     		    			wPlugin.getRegionManager(event.getPlayer().getWorld()).getRegion(houseName).setOwners(lister);
     		    			iConomy.getAccount(event.getPlayer().getName()).getHoldings().add(-(price));
     		    			event.getPlayer().sendMessage("You bought the house at: " + houseName + " for $" + price);
+    		    			hConfig.addDoorOwner(player, houseName);
     		    			owners = hConfig.getDoorOwners(houseName);
     		    			sign.setLine(0, houseName);
         		    		sign.setLine(1, "Owner:");
