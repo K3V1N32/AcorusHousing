@@ -69,6 +69,9 @@ public class AcorusHousingPlayerListener extends PlayerListener {
 	}
     
     public void onPlayerInteract(PlayerInteractEvent event) {
+    	if(event.getClickedBlock() == null) {
+    		return;
+    	}
     	if(event.getClickedBlock().getType().equals(Material.WOODEN_DOOR)) {
     		hConfig = new HouseConfig();
     		Block door = event.getClickedBlock();
@@ -76,7 +79,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		String player = event.getPlayer().getName();
     		if(hConfig.doorExists(door)) {
     			String house = hConfig.getDoorHouse(door);
-    			if(hConfig.isOwner(house, player)) {
+    			if(hConfig.isOwner(house, player) || plugin.permissionHandler.has(player1, "acorus.housing.admin") || player1.isOp()) {
     				
     			} else {
     				player1.sendMessage("§4Access Denied");
@@ -84,7 +87,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     			}
     		} else if(hConfig.doorExists(door.getRelative(0, 1, 0))) {
     			String house = hConfig.getDoorHouse(door.getRelative(0, 1, 0));
-    			if(hConfig.isOwner(house, player)) {
+    			if(hConfig.isOwner(house, player)  || plugin.permissionHandler.has(player1, "acorus.housing.admin") || player1.isOp()) {
     				
     			} else {
     				player1.sendMessage("§4Access Denied");
@@ -92,7 +95,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     			}
     		} else if(hConfig.doorExists(door.getRelative(0, -1, 0))) {
     			String house = hConfig.getDoorHouse(door.getRelative(0, -1, 0));
-    			if(hConfig.isOwner(house, player)) {
+    			if(hConfig.isOwner(house, player)  || plugin.permissionHandler.has(player1, "acorus.housing.admin") || player1.isOp()) {
     				
     			} else {
     				player1.sendMessage("§4Access Denied");

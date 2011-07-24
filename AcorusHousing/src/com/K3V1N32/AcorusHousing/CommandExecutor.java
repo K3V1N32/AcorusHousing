@@ -156,10 +156,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 						owners.addPlayer(args[2]);
 						wPlugin.getRegionManager(player.getWorld()).getRegion(args[1]).setOwners(owners);
 						sender.sendMessage("Succesfully gave " + args[2] + " a key!");
-						if(plugin.getServer().getPlayer(args[1]).isOnline()) {
-							plugin.getServer().getPlayer(args[1]).sendMessage("You have recived a key from " + (player).getName());
-							plugin.getServer().getPlayer(args[1]).sendMessage("To the house: " + args[1]);
-						} return false;
+						return false;
 					} else {
 						sender.sendMessage("Error Adding Player!");
 						return false;
@@ -175,13 +172,11 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 						DefaultDomain owners = wPlugin.getRegionManager(player.getWorld()).getRegion(args[1]).getOwners();
 						owners.removePlayer(args[2]);
 						wPlugin.getRegionManager(player.getWorld()).getRegion(args[1]).setOwners(owners);
-						sender.sendMessage("Succesfully took key from" + args[2]);
-						if(plugin.getServer().getPlayer(args[1]).isOnline()) {
-							plugin.getServer().getPlayer(args[1]).sendMessage("" + (player).getName() + " has taken your key");
-							plugin.getServer().getPlayer(args[1]).sendMessage("To the house: " + args[1]);
-						} return true;
+						sender.sendMessage("Succesfully took key from " + args[2]);
+						return true;
 					} else {
 						sender.sendMessage("Error Removing Player!");
+						return false;
 					}
 				} else {
 					sender.sendMessage("§4Access Denied");
