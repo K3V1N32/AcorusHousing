@@ -26,9 +26,48 @@ public class HouseConfig {
 	//add a player file so that the plugin knows if a player is valid or not :P
 	public void addPlayer(String player) {
 		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
+		houseConfig.setProperty("isBuying", false);
+		houseConfig.setProperty("isCreating", false);
+		houseConfig.setProperty("isUpdating", false);
 		houseConfig.save();
 	}
 	
+	public boolean isUpdating(String player) {
+		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
+		houseConfig.load();
+		return houseConfig.getBoolean("isUpdating", false);
+	}
+	
+	public boolean isCreating(String player) {
+		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
+		houseConfig.load();
+		return houseConfig.getBoolean("isCreating", false);
+	}
+	
+	public boolean isBuying(String player) {
+		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
+		houseConfig.load();
+		return houseConfig.getBoolean("isBuying", false);
+	}
+	
+	public void setBuying(String player, boolean isLolz) {
+		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
+		houseConfig.load();
+		houseConfig.setProperty("isBuying", isLolz);
+		houseConfig.save();
+	}
+	public void setCreating(String player, boolean isLolz) {
+		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
+		houseConfig.load();
+		houseConfig.setProperty("isCreating", isLolz);
+		houseConfig.save();
+	}
+	public void setUpdating(String player, boolean isLolz) {
+		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
+		houseConfig.load();
+		houseConfig.setProperty("isUpdating", isLolz);
+		houseConfig.save();
+	}
 	//returns true if it added the house, and false if the house already exists
 	public boolean addHouse(String house, Block door) {
 		owners = null;
@@ -62,7 +101,6 @@ public class HouseConfig {
 			return true;
 		}
 	}
-	
 	//
 	public String getDoorHouse(Block door) {
 		String doorLoc = saveLocation(door.getLocation());

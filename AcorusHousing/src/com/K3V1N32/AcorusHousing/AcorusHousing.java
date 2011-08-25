@@ -8,13 +8,15 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.entity.*;
 
 import com.iConomy.iConomy;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import org.bukkit.plugin.Plugin;
+
+import org.getspout.*;
 /**
  * AcorusHousing for Bukkit
  * @author K3V1N32
@@ -39,8 +41,6 @@ public class AcorusHousing extends JavaPlugin {
     
     // Command Executor
     CommandExecutor commandExecutor = new CommandExecutor(playerListener, this);
-
-    
     
     //onDisable
     public void onDisable() {
@@ -56,11 +56,14 @@ public class AcorusHousing extends JavaPlugin {
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLUGIN_ENABLE, new Server(this), Priority.Monitor, this);
         pm.registerEvent(Type.PLUGIN_DISABLE, new Server(this), Priority.Monitor, this);
-        
+        pm.registerEvent(Type.ENTITY_INTERACT, new Server(this), Priority.Monitor, this);
         // Command Executor Init
         getCommand("house").setExecutor(commandExecutor);
 		//houseConfig
 		config = new HouseConfig();
+		
+		//idk...
+		
 		
 		//setup perms
 		setupPermissions();
@@ -85,7 +88,7 @@ public class AcorusHousing extends JavaPlugin {
         permissionHandler = ((Permissions) permissionsPlugin).getHandler();
         log.info("[AcorusHousing] Found and will use plugin "+((Permissions)permissionsPlugin).getDescription().getFullName());
     }
-    //for saving cuboids lol
+    //for stuff ;]
     public WorldEditPlugin getWorldEdit() {
         Plugin plugin = getServer().getPluginManager().getPlugin("WorldEdit");//for some god damn reason, this line gives a null pointer exception even if worldguard is loaded >:[
      
@@ -95,9 +98,9 @@ public class AcorusHousing extends JavaPlugin {
         }
         return (WorldEditPlugin) plugin;
     }
-    //Yay WORLDGUARD LOL
+    //LOLNOPE
     public WorldGuardPlugin getWorldGuard() {
-        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");//for some god damn reason, this line gives a null pointer exception even if worldguard is loaded >:[
+        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
      
         // WorldGuard may not be loaded
         if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
@@ -105,5 +108,4 @@ public class AcorusHousing extends JavaPlugin {
         }
         return (WorldGuardPlugin) plugin;
     }
-    
 }

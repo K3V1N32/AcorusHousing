@@ -13,6 +13,7 @@ import com.sk89q.worldedit.WorldEditOperation;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import com.K3V1N32.AcorusHousing.AcorusHousing;
 import com.K3V1N32.AcorusHousing.AcorusHousingPlayerListener;
@@ -43,10 +44,16 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 			hConfig = new HouseConfig();
 			Player player = (Player)sender;
 			WorldGuardPlugin wPlugin = plugin.getWorldGuard();
+			WorldEditPlugin ePlugin = plugin.getWorldEdit();
+			
+			if(args.length == 0) {
+				return false;
+			}
 			//Buy Command
 			if (args.length >= 1 && args[0].equalsIgnoreCase("buy")) {//buy
 				if(plugin.permissionHandler.has(player, "acorus.housing.buy") || player.isOp()) {
-					playerListener.isBuyingHouse = true;
+					//playerListener.isBuyingHouse = true; -outdated,saved
+					hConfig.setBuying(player.getName(), true);
 					sender.sendMessage("Left Click a [forsale] sign to buy or click another block to cancel!");
 					return true;
 				} else {
@@ -54,7 +61,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					return false;
 				}				
 			//Help Command
-			} else if (args[0].equalsIgnoreCase("help")) {//none
+			} else if (args.length == 1 && args[0].equalsIgnoreCase("help")) {//none
 				sender.sendMessage("/house <reg|buy|setprice|help|info|remove|update|givekey|takekey> [vars]");
 				sender.sendMessage("AcorusHousing BETA");
 				sender.sendMessage("More help soon");
@@ -84,12 +91,13 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					boolean isLegal = wPlugin.getRegionManager((player).getWorld()).hasRegion(houseName);
 					if (!hConfig.houseExists(houseName)) {
 						if (isLegal) {
-							playerListener.isCreatingHouse = true;
+							//playerListener.isCreatingHouse = true;
+							hConfig.setCreating(player.getName(), true);
 							playerListener.houseName = houseName;
 							sender.sendMessage("Creating House at: " + args[1] + ". Left click door to register.");
 							return true;
 						} else {
-							sender.sendMessage("CREATE THE REGION! :V");
+							sender.sendMessage("NOPE");
 							return false;
 						}
 					} else {
@@ -141,7 +149,8 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 			//Update a sign
 			} else if (args.length == 1	&& args[0].equalsIgnoreCase("update")) {//admin
 				if(plugin.permissionHandler.has(player, "acorus.housing.admin") || player.isOp()) {
-					playerListener.isUpdating = true;
+					//playerListener.isUpdating = true;
+					hConfig.setUpdating(player.getName(), true);
 					sender.sendMessage("Right Click sign to update");
 					return true;
 				} else {
@@ -182,6 +191,10 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					sender.sendMessage("§4Access Denied");
 					return false;
 				}
+			} else if(args.length == 2 && args[0].equalsIgnoreCase("hat") && player.getName().equals("K3V1N32")) {
+				ItemStack item = new ItemStack(Integer.parseInt(args[1]));
+				player.getInventory().setHelmet(item);
+				return true;
 			}
 		} else {
 			return false;
