@@ -4,6 +4,7 @@ AcorusHousing
 Installation
 -
 Plugins you will need:
+
 		* WorldGuard (link placeholder)
 		* WorldEdit (link placeholder)
 		* Permissions (link placeholder)
