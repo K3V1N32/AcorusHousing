@@ -43,7 +43,7 @@ Acorus Housing is a bukkit housing plugin that uses worldguard and permissions t
 How to use
 -------
 
-* 1. Server staff creates a(n) apartment/house and would like for players to be allowed to buy it, but does not want to have to be on at the same time as the player for the player to purchase the house.
+1. Server staff creates a(n) apartment/house and would like for players to be allowed to buy it, but does not want to have to be on at the same time as the player for the player to purchase the house.
 * 2. Server staff marks the 'editable' boundries of the house/apartment with worldedits wand (a wooden axe for acorus)
 * 3. Server staff types /region definr (address)
 * 4. Server staff establishes an address for the house/apartment
