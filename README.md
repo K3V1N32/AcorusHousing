@@ -51,32 +51,20 @@ How to use
 * 6. The default price is $1000 If the staff wishes the house to be a different price, type: /house forsale (address) (price)
 * 7. House (address) is registered and ready to be sold! all we need now is a way to sell it =)
 * 8. Server staff puts down a sign (most likely next to the apartment/house, or in a real estate office) and writes this on it:
-
-Line 1:[houseinfo]
-
-Line 2:(address)
-
+** Line 1:[houseinfo]
+** Line 2:(address)
 * 9. Server staff presses done and then right clicks the sign to 'initialize it', the sign now reads:
-
-Line 1:(address)
-
-Line 2:[forsale]
-
-Line 3:(price)
-
-Line 4:/house buy
-
+** Line 1:(address)
+** Line 2:[forsale]
+** Line 3:(price)
+** Line 4:/house buy
 * 10. The house/apartment is now ready to be bought!
 * 11. Player finds a house that they want and found the sign that belongs to that house
 * 12. Player types: /house buy, and left clicks the sign, money is credited and the property is no owned by Player
 * 13. The sign should now read:
-
-Line 1:(address)
-
-Line 2:Owner:
-
-Line 3:(owner)
-
+** Line 1:(address)
+** Line 2:Owner:
+** Line 3:(owner)
 * 14. Players friend comes onto server and wants to live in friends house with him(moocher!)
 * 15. Player types /house givekey (address) (player name(moocher in this case))
 * 16. moocher can now edit blocks/open the door to Players house/apartment
