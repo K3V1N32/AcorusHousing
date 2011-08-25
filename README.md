@@ -4,15 +4,16 @@ AcorusHousing
 Installation
 -
 Plugins you will need:
--WorldGuard (link placeholder)
--WorldEdit (link placeholder)
--Permissions (link placeholder)
--IConomy (link placeholder)
+- WorldGuard (link placeholder)
+- WorldEdit (link placeholder)
+- Permissions (link placeholder)
+- IConomy (link placeholder)
 
 Just place the 'AcorusHousing.jar'  file in your 'plugins' folder along with the required plugins.
 
 Download
 -
+
 http://dl.dropbox.com/u/22923847/BukkitPlugins/AcorusHousing/AcorusHousing.jar
 
 Key
@@ -27,16 +28,16 @@ Key
 Commands
 -
 
-* /house [reg|buy|help|info|forsale|remove|update|givekey|takekey] <address|player|price>
-* /house reg (house address) _-=Registers a house with the address given=-_ //acorus.housing.admin
-* /house buy _-=Lets Users Buy a house=-_ //acorus.housing.buy
-* /hosue help _-=Shows a help page=-_ //anyone!
-* /house info (house address) _-=Shows the owners and price of a house=-_  //acorus.housing.info
-* /house forsale (house address) (price) _-=Sets the specified houses price=-_ //acorus.housing.admin
-* /house remove (house address) _-=Removes a house=-_ //acorus.housing.admin
-* /house update _-=Update a [forsale] sign=-_ //acorus.housing.admin
-* /house givekey (house address) (player) _-=Gives a key to the specified player for a house=-_ //owner or |acorus.housing.admin|
-* /house takekey (house address) (player) _-=Takes a key from specified player for a house=-_ //owner or |acorus.housing.admin|
+		* /house [reg|buy|help|info|forsale|remove|update|givekey|takekey] <address|player|price>
+		* /house reg (house address) _-=Registers a house with the address given=-_ //acorus.housing.admin
+		* /house buy _-=Lets Users Buy a house=-_ //acorus.housing.buy
+		* /hosue help _-=Shows a help page=-_ //anyone!
+		* /house info (house address) _-=Shows the owners and price of a house=-_  //acorus.housing.info
+		* /house forsale (house address) (price) _-=Sets the specified houses price=-_ //acorus.housing.admin
+		* /house remove (house address) _-=Removes a house=-_ //acorus.housing.admin
+		* /house update _-=Update a [forsale] sign=-_ //acorus.housing.admin
+		* /house givekey (house address) (player) _-=Gives a key to the specified player for a house=-_ //owner or |acorus.housing.admin|
+		* /house takekey (house address) (player) _-=Takes a key from specified player for a house=-_ //owner or |acorus.housing.admin|
 
 About
 -
