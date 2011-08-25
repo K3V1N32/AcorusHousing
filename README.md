@@ -4,10 +4,10 @@ AcorusHousing
 Installation
 -
 Plugins you will need:
-			* WorldGuard (link placeholder)
-			* WorldEdit (link placeholder)
-			* Permissions (link placeholder)
-			* IConomy (link placeholder)
+		* WorldGuard (link placeholder)
+		* WorldEdit (link placeholder)
+		* Permissions (link placeholder)
+		* IConomy (link placeholder)
 
 Just place the 'AcorusHousing.jar'  file in your 'plugins' folder along with the required plugins.
 
