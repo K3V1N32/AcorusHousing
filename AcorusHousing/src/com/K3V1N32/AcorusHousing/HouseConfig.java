@@ -20,9 +20,34 @@ public class HouseConfig {
 	public HouseConfig() {
 	}
 	
+	public void createConfig () {
+		houseConfig = new Configuration(new File(configDir + File.separator + "Aconfig.yml"));
+		File finder = new File(configDir + File.separator + "Aconfig.yml");
+		if(finder.exists()) {
+			return;
+		} else {
+			houseConfig.setProperty("initPrice", "1000");
+			houseConfig.save();
+		}
+	}
+	
+	public String loadConfig() {
+		houseConfig = new Configuration(new File(configDir + File.separator + "Aconfig.yml"));
+		File finder = new File(configDir + File.separator + "Aconfig.yml");
+		if(finder.exists()) {
+			houseConfig.load();
+			String pp = houseConfig.getString("initPrice");
+			return pp;
+		} else {
+			return "1000";
+		}
+	}
+	
+	//lol
 	public String saveLocation(Location oldLocation) {
 		return "x" + oldLocation.getBlockX() + "y" + oldLocation.getBlockY() + "z" + oldLocation.getBlockZ() + "".replace(".", "_").replace("-", "N");
 	}
+	
 	//add a player file so that the plugin knows if a player is valid or not :P
 	public void addPlayer(String player) {
 		houseConfig = new Configuration(new File(configDir + "players" + File.separator + player + ".yml"));
@@ -70,13 +95,14 @@ public class HouseConfig {
 	}
 	//returns true if it added the house, and false if the house already exists
 	public boolean addHouse(String house, Block door) {
+		String ppp = loadConfig();
 		owners = null;
 		String doorLoc = saveLocation(door.getLocation());
 		File houseFile = new File(configDir + "houses" + File.separator + house + ".yml");
 		houseConfig = new Configuration(new File(configDir + "houses" + File.separator + house + ".yml"));
 		if(!houseFile.exists()) {
 			houseConfig.setProperty("houseName", house);
-			houseConfig.setProperty("price", "1000");
+			houseConfig.setProperty("price", ppp);
 			houseConfig.setProperty("owners", owners);
 			houseConfig.setProperty("doorLoc", doorLoc);
 			houseConfig.save();

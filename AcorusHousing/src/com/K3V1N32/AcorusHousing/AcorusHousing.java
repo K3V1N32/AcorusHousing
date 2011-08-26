@@ -17,6 +17,7 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import org.getspout.*;
+import org.getspout.spoutapi.SpoutManager;
 /**
  * AcorusHousing for Bukkit
  * @author K3V1N32
@@ -27,6 +28,9 @@ public class AcorusHousing extends JavaPlugin {
 	
 	//check if permissions is here
 	public boolean isPerm = false;
+	
+	//for teh spout
+	public SpoutManager sManager;
 	
 	// iConomy and Permissions
 	public iConomy iConomy = null;
@@ -46,7 +50,7 @@ public class AcorusHousing extends JavaPlugin {
     public void onDisable() {
         log.info("[AcorusHousing] See You Later!");
     }
-    
+
     //onEnable
     public void onEnable() {
     	// PluginManager = Yummy.
@@ -61,9 +65,7 @@ public class AcorusHousing extends JavaPlugin {
         getCommand("house").setExecutor(commandExecutor);
 		//houseConfig
 		config = new HouseConfig();
-		
-		//idk...
-		
+		config.createConfig();
 		
 		//setup perms
 		setupPermissions();
@@ -73,6 +75,7 @@ public class AcorusHousing extends JavaPlugin {
         log.info( pdfFile.getName() + " version " + pdfFile.getVersion() + " is Enhancing Your Housing!" );
     }
     
+    //Permissions
     private void setupPermissions() {
         if (permissionHandler != null) {
             return;
@@ -88,9 +91,9 @@ public class AcorusHousing extends JavaPlugin {
         permissionHandler = ((Permissions) permissionsPlugin).getHandler();
         log.info("[AcorusHousing] Found and will use plugin "+((Permissions)permissionsPlugin).getDescription().getFullName());
     }
-    //for stuff ;]
+    //WorldEdit
     public WorldEditPlugin getWorldEdit() {
-        Plugin plugin = getServer().getPluginManager().getPlugin("WorldEdit");//for some god damn reason, this line gives a null pointer exception even if worldguard is loaded >:[
+        Plugin plugin = getServer().getPluginManager().getPlugin("WorldEdit");
      
         // WorldGuard may not be loaded
         if (plugin == null || !(plugin instanceof WorldEditPlugin)) {
@@ -98,7 +101,8 @@ public class AcorusHousing extends JavaPlugin {
         }
         return (WorldEditPlugin) plugin;
     }
-    //LOLNOPE
+    
+    //WorldGuard
     public WorldGuardPlugin getWorldGuard() {
         Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
      

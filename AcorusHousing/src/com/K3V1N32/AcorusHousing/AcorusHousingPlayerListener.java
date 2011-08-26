@@ -152,11 +152,23 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    	if(!(owners == null)) {
     		    		if(hConfig.houseExists(houseName) && owners.isEmpty()) {
     		    			int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
+    		    			String pString = "0";
+    		    			if(price >= 1000 && price < 1000000) {
+    		    				price = price/1000;
+    		    				pString = price + "K";
+    		    			}else if(price >= 1000000) {
+    		    				price = price/1000000;
+    		    				pString = price + "M";
+    		    			}
+    		    			else if(price < 1000) {
+    		    				pString = price + "";
+    		    			}
     		    			sign.setLine(0, houseName);
     		    			sign.setLine(1, "[forsale]");
-    		    			sign.setLine(2, "§5" + "$" + price);
+    		    			sign.setLine(2, "§5" + "$" + pString);
     		    			sign.setLine(3, "/house buy");
     		    			sign.update();
+    		    			player.sendMessage("Created!");
     		    		} else if(!hConfig.houseExists(houseName)){
     		    			sign.setLine(0, "");
     		    			sign.setLine(1, "§5NO HOUSE");
@@ -169,6 +181,7 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    			sign.setLine(2, "§5" + owners.get(0));
     		    			sign.setLine(3, "");
     		    			sign.update();
+    		    			player.sendMessage("Updated!");
     		    		}
     		    	} else {
     		    		
@@ -181,13 +194,25 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    	//update :P
     		    	if(hConfig.houseExists(houseName) && isUpdating && owners.isEmpty()) {
     		    		int price = Integer.parseInt(hConfig.getDoorPrice(houseName));
+		    			String pString = "0";
+		    			if(price >= 1000 && price < 1000000) {
+		    				price = price/1000;
+		    				pString = price + "K";
+		    			}else if(price >= 1000000) {
+		    				price = price/1000000;
+		    				pString = price + "M";
+		    			}
+		    			else if(price < 1000) {
+		    				pString = price + "";
+		    			}
     		    		sign.setLine(0, houseName);
     		    		sign.setLine(1, "[forsale]");
-    		    		sign.setLine(2, "§5" + "$" + price);
+    		    		sign.setLine(2, "§5" + "$" + pString);
     		    		sign.setLine(3, "/house buy");
     		    		sign.update();
     		    		isUpdating = false;
     		    		hConfig.setUpdating(player.getName(), false);
+    		    		player.sendMessage("Update Success!");
     		    	} else if((!owners.isEmpty()) && isUpdating) {
     		    		sign.setLine(0, houseName);
     		    		sign.setLine(1, "Owner:");
@@ -196,8 +221,9 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    		sign.update();
     		    		isUpdating = false;
     		    		hConfig.setUpdating(player.getName(), false);
+    		    		player.sendMessage("Update Success!");
     		    	} else if(isUpdating) {
-    		    		event.getPlayer().sendMessage("...and your done, or not");
+    		    		player.sendMessage("...and your done, or not(unknown error =S)");
     		    		hConfig.setUpdating(player.getName(), false);
     		    		isUpdating = false;
     		    	} 
@@ -240,13 +266,13 @@ public class AcorusHousingPlayerListener extends PlayerListener {
     		    			isBuyingHouse = false;
     		    			hConfig.setBuying(player.getName(), false);
     		    		} else {
-    		    			event.getPlayer().sendMessage("Error!!!!");
+    		    			event.getPlayer().sendMessage("Error!!!!(This Literally Should NEVER happen!)");
     		    			isBuyingHouse = false;
     		    			hConfig.setBuying(player.getName(), false);
     		    		}
     		    	}
     		    } else if(isBuyingHouse && sign.getLine(1).equalsIgnoreCase("[forsale]") && !plugin.permissionHandler.has(event.getPlayer(), "acorus.housing.buy")) {
-    		    	event.getPlayer().sendMessage("AccessDenied");
+    		    	event.getPlayer().sendMessage("§4Access Denied");
     		    }
     		}
     	} else

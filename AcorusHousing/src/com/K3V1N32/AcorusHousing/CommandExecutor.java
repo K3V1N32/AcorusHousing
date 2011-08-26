@@ -3,11 +3,18 @@ package com.K3V1N32.AcorusHousing;
 import java.io.File;
 import java.util.List;
 
+import org.bukkit.Achievement;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import org.getspout.spoutapi.gui.Button;
+import org.getspout.spoutapi.gui.GenericButton;
+import org.getspout.spoutapi.gui.GenericPopup;
+import org.getspout.spoutapi.gui.PopupScreen;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 import com.sk89q.worldedit.WorldEditOperation;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
@@ -27,6 +34,7 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 	public WorldGuardPlugin wPlugin;
 	public WorldEditPlugin wePlugin;
 	public WorldEditOperation op1;
+	public SpoutPlayer spoutplayer;
 
 	public String houseName;
 	public String player;
@@ -41,18 +49,18 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("house")) {
+			
 			hConfig = new HouseConfig();
 			Player player = (Player)sender;
 			WorldGuardPlugin wPlugin = plugin.getWorldGuard();
 			WorldEditPlugin ePlugin = plugin.getWorldEdit();
-			
 			if(args.length == 0) {
+				player.sendMessage("Please include a sub command!(see: /house help)");
 				return false;
 			}
 			//Buy Command
 			if (args.length >= 1 && args[0].equalsIgnoreCase("buy")) {//buy
 				if(plugin.permissionHandler.has(player, "acorus.housing.buy") || player.isOp()) {
-					//playerListener.isBuyingHouse = true; -outdated,saved
 					hConfig.setBuying(player.getName(), true);
 					sender.sendMessage("Left Click a [forsale] sign to buy or click another block to cancel!");
 					return true;
@@ -68,8 +76,12 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 				sender.sendMessage("More info at: http://www.acorusgame.us");
 				return true;
 			//Info Command
-			} else if (args.length == 2 && args[0].equals("info")) {//info
+			} else if (args[0].equals("info")) {//info
 				if(plugin.permissionHandler.has(player, "acorus.housing.info") || player.isOp()) {
+					if(args.length != 2) {
+						player.sendMessage("/house info [house name]");
+						return false;
+					}
 					if (hConfig.houseExists(args[1])) {
 						int price = Integer.parseInt(hConfig.getDoorPrice(args[1]));
 						sender.sendMessage("The price of " + args[1] + " is: " + price);
@@ -85,7 +97,11 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					return false;
 				}
 			//House Registration Command
-			} else if (args.length == 2 && args[0].equals("reg")) {//admin
+			} else if (args[0].equals("reg")) {//admin
+				if(args.length != 2) {
+					player.sendMessage("/house reg [House Name]");
+					return false;
+				}
 				if(plugin.permissionHandler.has(player, "acorus.housing.admin") || player.isOp()) {
 					houseName = args[1];
 					boolean isLegal = wPlugin.getRegionManager((player).getWorld()).hasRegion(houseName);
@@ -109,7 +125,11 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					return false;
 				}
 			//Put a house forsale
-			} else if (args.length == 3 && args[0].equals("setprice")) {//admin
+			} else if (args[0].equals("setprice")) {//admin
+				if(args.length != 3) {
+					player.sendMessage("/house setprice [House Name] [Price]");
+					return false;
+				}
 				if(plugin.permissionHandler.has(player, "acorus.housing.admin") || player.isOp()) {
 					if (hConfig.houseExists(args[1])) {
 						hConfig.setDoorPrice(args[1], args[2]);
@@ -124,7 +144,11 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					return false;
 				}	
 			//Remove a house
-			} else if (args.length == 2	&& args[0].equalsIgnoreCase("remove")) {//admin
+			} else if (args[0].equalsIgnoreCase("remove")) {//admin
+				if(args.length != 2) {
+					player.sendMessage("/house remove [House Name]");
+					return false;
+				}
 				if(plugin.permissionHandler.has(player, "acorus.housing.admin") || player.isOp()) {
 					if (hConfig.houseExists(args[1])) {
 						String doorLoc = hConfig.getDoorLoc(args[1]);
@@ -147,7 +171,11 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					return false;
 				}
 			//Update a sign
-			} else if (args.length == 1	&& args[0].equalsIgnoreCase("update")) {//admin
+			} else if (args[0].equalsIgnoreCase("update")) {//admin
+				if(args.length != 1) {
+					player.sendMessage("/house update");
+					return false;
+				}
 				if(plugin.permissionHandler.has(player, "acorus.housing.admin") || player.isOp()) {
 					//playerListener.isUpdating = true;
 					hConfig.setUpdating(player.getName(), true);
@@ -158,7 +186,11 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					return false;
 				}
 			//Give someone a key (also a backup command for giving someone a house if there is no sign for that house kindof :P)
-			} else if(args.length == 3 && args[0].equalsIgnoreCase("givekey")) {//admin
+			} else if(args[0].equalsIgnoreCase("givekey")) {//admin
+				if(args.length != 3) {
+					player.sendMessage("/house givekey [House Name] [Player Name]");
+					return false;
+				}
 				if((plugin.permissionHandler.has(player, "acorus.housing.admin") || hConfig.isDoorOwner(args[1], player.getName()) || player.isOp()) && hConfig.playerExists(args[2]) && !(hConfig.isOwner(args[1], args[2]))) {
 					if(hConfig.addDoorOwner(args[2], args[1])) {
 						DefaultDomain owners = wPlugin.getRegionManager(player.getWorld()).getRegion(args[1]).getOwners();
@@ -175,7 +207,11 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					return false;
 				}
 			//takes away someones ownership of a house
-			} else if(args.length == 3 && args[0].equalsIgnoreCase("takekey")) {//admin
+			} else if(args[0].equalsIgnoreCase("takekey")) {//admin
+				if(args.length != 3) {
+					player.sendMessage("/house takekey [House Name] [Player Name]");
+					return false;
+				}
 				if((plugin.permissionHandler.has(player, "acorus.housing.admin") || hConfig.isDoorOwner(args[0], (player).getName()) || player.isOp()) && hConfig.playerExists(args[2]) && (hConfig.isOwner(args[1], args[2]))) {
 					if(hConfig.remDoorOwner(args[2], args[1])) {
 						DefaultDomain owners = wPlugin.getRegionManager(player.getWorld()).getRegion(args[1]).getOwners();
@@ -195,6 +231,13 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 				ItemStack item = new ItemStack(Integer.parseInt(args[1]));
 				player.getInventory().setHelmet(item);
 				return true;
+			} else if(args.length == 1 && args[0].equalsIgnoreCase("spout")) {
+				spoutplayer = (SpoutPlayer)player;
+				if(spoutplayer.isSpoutCraftEnabled()) {
+					spoutplayer.setTexturePack("http://dl.dropbox.com/u/22923847/BukkitPlugins/moderncraftalpha5mowed.zip");
+				} else {
+					return false;
+				}
 			}
 		} else {
 			return false;

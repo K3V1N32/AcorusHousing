@@ -65,7 +65,7 @@ How to use
 	* Line 4:/house buy
 * The house/apartment is now ready to be bought!
 * Player finds a house that they want and found the sign that belongs to that house
-* Player types: /house buy, and left clicks the sign, money is credited and the property is no owned by Player
+* Player types: /house buy, and left clicks the sign, money is credited and the property is now owned by Player
 * The sign should now read:
 	* Line 1:(house address)
 	* Line 2:Owner:
