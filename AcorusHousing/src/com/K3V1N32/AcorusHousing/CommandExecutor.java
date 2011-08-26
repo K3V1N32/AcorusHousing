@@ -227,10 +227,6 @@ public class CommandExecutor implements org.bukkit.command.CommandExecutor {
 					sender.sendMessage("§4Access Denied");
 					return false;
 				}
-			} else if(args.length == 2 && args[0].equalsIgnoreCase("hat") && player.getName().equals("K3V1N32")) {
-				ItemStack item = new ItemStack(Integer.parseInt(args[1]));
-				player.getInventory().setHelmet(item);
-				return true;
 			} else if(args.length == 1 && args[0].equalsIgnoreCase("spout")) {
 				spoutplayer = (SpoutPlayer)player;
 				if(spoutplayer.isSpoutCraftEnabled()) {
